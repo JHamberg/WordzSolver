@@ -1,4 +1,4 @@
-javalabra
+Javalabra
 =========
 
-Hello world!
+Kts. dokumentaatio
