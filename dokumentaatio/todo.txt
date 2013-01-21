@@ -1,0 +1,9 @@
+-Mainin siivoaminen
+-Tuki usealle sanakirjalle
+-Haku-algoritmin toteutus
+-Käyttöliittymä
+	+Sanalista (kaksiosainen)
+	+Sanojen korostus
+	+Menu (sanakirjojen muokkaus/lisääminen)
+-Testien temp-tiedostojen poisto
+-Lisää testejä
