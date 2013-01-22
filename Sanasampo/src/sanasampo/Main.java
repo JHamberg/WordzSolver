@@ -13,7 +13,7 @@ import sanasampo.ui.Kayttoliittyma;
 // @author JHamberg 
 public class Main {
 
-    public static void main(String[] args)  throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         //TBI: Siirrä ohjelman alustus omaan luokkaansa
 
         Hakemisto h = new Hakemisto(new Sanakirja());

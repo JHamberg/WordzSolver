@@ -42,21 +42,19 @@ public class Haku {
 
     private void eliminoiMahdottomat(Sanakirja s) {
         for (String sana : s.getSanat()) {
-            if(checkExistance(sana)){
+            if (checkExistance(sana)) {
                 mahdolliset.add(sana);
             }
-            }
         }
-    
-    private boolean checkExistance(String s){
-      for(int i=0; i<s.length(); i++){
-          if(!r.containsChar(s.charAt(i))){
-              return false;
-          }
-      }
-      return true;
-    }
-    
-    
     }
 
+    private boolean checkExistance(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (!r.containsChar(s.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+}

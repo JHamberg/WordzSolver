@@ -1,4 +1,13 @@
 Tiistai 15.01.2013, 2h Gitin käyttöönotto, Netbeansin projektin luonti, aihemäärittely
-Torstai 17.1.2013, 2h Suunnittelua paperilla, pseudokoodia
-Lauantai 19.1.2013, 1h Määrittelyvaiheen luokkakaavio, alustavat luokat, hieman koodia
-Maanantai 21.1.2013, 10h Perustoiminnallisuus kasaan, sanakirjojen hallinta, ruudukko, JUnit testit, alustava käyttöliittymä
+
+Torstai 17.1.2013, 2h 
+Suunnittelua paperilla, pseudokoodia
+
+Lauantai 19.1.2013, 1h 
+Määrittelyvaiheen luokkakaavio, alustavat luokat, hieman koodia
+
+Maanantai 21.1.2013, 10h 
+Perustoiminnallisuus kasaan, sanakirjojen hallinta, ruudukko, JUnit testit, alustava käyttöliittymä
+
+Tiistai 21.1.2013, 3h
+Hakualgoritmin runko pystyyn, cleanup deadlinea varten, metodikoko pienemmäksi

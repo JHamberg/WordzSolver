@@ -79,4 +79,21 @@ public class Ruudukko {
         }
         return false;
     }
+    
+    public int[][] charSijainti(char ch) {
+        int k = 0;
+        int[][] sijainnit = new int[reuna][reuna];
+        String c = Character.toString(ch); //Käytössä String 
+        for (int i = 0; i < reuna; i++) {
+            for (int j = 0; j < reuna; j++) {
+                if (ruudukko[i][j].equals(c)){
+                    sijainnit[k][0]=i;
+                    sijainnit[k][1]=j;
+                    k++;
+                    return sijainnit;
+                }
+            }
+        }
+        return sijainnit;
+    }
 }
