@@ -30,6 +30,11 @@ public class SanakirjaTest {
         System.out.println("kutsuttu kerran");
         f.delete(); //Tuhotaan TEMP tiedosto testin jalkeen
     }
+    
+    @Test
+    public void ensimmainenSanaOikea() throws IOException {
+        assertEquals("voi", s.getSana(0));
+    }
 
     @Test
     public void sanakirjassaSanoja() throws FileNotFoundException {
@@ -50,18 +55,15 @@ public class SanakirjaTest {
     public void yksiSanaisenKirjanKoko() throws IOException {
         output.write("abc123");
         output.close();
-        assertEquals(1, new Sanakirja("temp.txt").getReuna());
+        assertEquals(1, new Sanakirja("temp.txt").getKoko());
     }
     
-    @Test
-    public void ensimmainenSanaOikea() throws IOException {
-        assertEquals("voi", s.getSana(0));
-    }
+    
     @Test
     public void kaksiSanaisenKirjanKoko() throws IOException {
         output.write("abc123");
         output.write(System.getProperty("line.separator") + "321cba");
         output.close();
-        assertEquals(2, new Sanakirja("temp.txt").getReuna());
+        assertEquals(2, new Sanakirja("temp.txt").getKoko());
     }
 }

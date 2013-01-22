@@ -23,7 +23,7 @@ public class Hakemisto {
     
     public boolean addSanakirja(Sanakirja sanakirja){
         for(Sanakirja s : hakemisto){
-            if (s.getPolku().equals(sanakirja.getPolku())){
+            if (s.getPolku().equals(sanakirja.getPolku())){ //Polku on uniikki jokaiselle
                 return false;
             }
         }
@@ -31,7 +31,7 @@ public class Hakemisto {
         return true;
     }
     
-    public ArrayList getSanakirjat(){
+    public ArrayList<Sanakirja> getSanakirjat(){
         return hakemisto;
     }
     

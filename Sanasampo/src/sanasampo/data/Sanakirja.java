@@ -1,53 +1,55 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sanasampo.data;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author Jonatan
- */
+//@author JHamberg
 public class Sanakirja {
 
-    private static final String DEFAULT_DICTIONARY = "sanat.txt"; // in main folder
+    //Staattiset
+    private static final String DEFAULT_DICTIONARY = "sanat.txt"; //in main folder 
+    private static final int DEFAULT_LENGTH = 3; //word length
+    
     private ArrayList<String> sanat;
-    private Scanner s;
     private String polku;
     private boolean error = false;
+    public int apinavakio = 101;
 
-    public Sanakirja() throws FileNotFoundException {
+    public Sanakirja() throws FileNotFoundException, IOException {
         this(DEFAULT_DICTIONARY);
     }
 
-    public Sanakirja(String polku) {
+    public Sanakirja(String polku) throws FileNotFoundException, IOException {
         try {
-            this.polku = polku;
-            s = new Scanner(new File(polku));
-            sanat = new ArrayList<String>();
-            String sana; 
+            FileReader r = new FileReader(polku);
+            BufferedReader lukija = new BufferedReader(r);
+            sanat = alustaSanakirja(lukija);
             
-            while (s.hasNext()) {
-                sana = s.next();
-                if(sana.length() >= 3){
-                    sanat.add(sana);
-                }
-                //Luetaan sanat tiedostosta listaan
-            }
-            s.close();
         } catch (FileNotFoundException e) {   //Jos tiedostoa ei ole 
-            System.out.println("Sanakirja 404"); //TBI Graafinen huomautus ja paluu
+            System.out.println("Not found!"); //TBI Graafinen huomautus ja paluu
             error = true;
         }
+    }
 
+    private ArrayList<String> alustaSanakirja(BufferedReader r) throws IOException{
+            
+            ArrayList<String> temp = new ArrayList<String>();
+
+            String sana;
+            while ((sana = r.readLine()) != null) {
+                if (sana.length() >= DEFAULT_LENGTH) {
+                    temp.add(sana);
+                }
+            }
+            r.close();
+            return temp;
     }
     
-
     public boolean getErrorState() {
         return error; //TBI workaround
     }
@@ -56,12 +58,16 @@ public class Sanakirja {
         return this.polku;
     }
 
-    public int getReuna() {
+    public int getKoko() {
         return sanat.size();
     }
 
     public String getSana(int i) {
         return sanat.get(i); //Tarkistus iteroinnin yhteydessa
+    }
+
+    public ArrayList<String> getSanat() {
+        return sanat;
     }
 
     public void viewSanakirja() {

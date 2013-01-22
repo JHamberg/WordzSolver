@@ -4,6 +4,7 @@
  */
 package sanasampo.data;
 
+import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,13 +18,23 @@ import static org.junit.Assert.*;
  */
 public class RuudukkoTest {
     Ruudukko r;
+    Random rand;
      
     public RuudukkoTest() {
        r =  new Ruudukko();
+       rand = new Random();
     }
     
     @After
     public void tearDown() {
+    }
+    
+    @Test
+    public void containsCharPalauttaaOikein() {
+        String c = "abcdefghi";
+        r.alusta(c);
+        int n = rand.nextInt(9); //Random to be certain 
+        assertEquals(true, r.containsChar(c.charAt(n)));
     }
     
     @Test
