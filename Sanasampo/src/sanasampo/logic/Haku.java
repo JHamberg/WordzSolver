@@ -42,19 +42,25 @@ public class Haku {
 
     private void eliminoiMahdottomat(Sanakirja s) {
         for (String sana : s.getSanat()) {
-            if (checkExistance(sana)) {
+            if (esiTarkasta(sana)) {
                 mahdolliset.add(sana);
             }
         }
     }
+    
+    
+    private boolean esiTarkasta(String s) {
+        Ruudukko temp = new Ruudukko(); //Kloonaus
+        temp.alusta(r.getKirjaimet());
 
-    private boolean checkExistance(String s) {
         for (int i = 0; i < s.length(); i++) {
-            if (!r.containsChar(s.charAt(i))) {
+            int x = temp.charSijainti(s.charAt(i))[0];
+            int y = temp.charSijainti(s.charAt(i))[1];
+            if (x == -1 && y == -1) {
                 return false;
             }
+            temp.poistaRuutu(x, y);
         }
         return true;
     }
-
 }

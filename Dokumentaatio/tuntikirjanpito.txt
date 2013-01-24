@@ -9,5 +9,8 @@ Määrittelyvaiheen luokkakaavio, alustavat luokat, hieman koodia
 Maanantai 21.1.2013, 10h 
 Perustoiminnallisuus kasaan, sanakirjojen hallinta, ruudukko, JUnit testit, alustava käyttöliittymä
 
-Tiistai 21.1.2013, 3h
+Tiistai 22.1.2013, 3h
 Hakualgoritmin runko pystyyn, cleanup deadlinea varten, metodikoko pienemmäksi
+
+Torstai 24.1.2013, 2h
+Hakualgoritmin esitarkistus, poikkeuksenhallinta, siistintää

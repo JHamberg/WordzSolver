@@ -18,7 +18,6 @@ public class Sanakirja {
     private ArrayList<String> sanat;
     private String polku;
     private boolean error = false;
-    public int apinavakio = 101;
 
     public Sanakirja() throws FileNotFoundException, IOException {
         this(DEFAULT_DICTIONARY);
@@ -68,9 +67,5 @@ public class Sanakirja {
 
     public ArrayList<String> getSanat() {
         return sanat;
-    }
-
-    public void viewSanakirja() {
-        //TODO
     }
 }

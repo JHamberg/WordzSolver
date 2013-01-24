@@ -42,12 +42,12 @@ public class SanakirjaTest {
     }
 
     @Test
-    public void alustusIlmanParametriaToimii() throws FileNotFoundException {
+    public void alustusIlmanParametriaToimii() throws FileNotFoundException, IOException{
         assertEquals(true, !(new Sanakirja().getPolku().isEmpty()));
     }
 
     @Test
-    public void olematonSanakirjaPalauttaaErrorin() {
+    public void olematonSanakirjaPalauttaaErrorin() throws FileNotFoundException, IOException{
         assertEquals(false, !(new Sanakirja("f8d4c5d3c5809257f483c97a36db8d57.txt").getErrorState()));
     }
 

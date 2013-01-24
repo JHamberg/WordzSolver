@@ -6,6 +6,7 @@ package sanasampo.data;
  */
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
@@ -22,7 +23,7 @@ public class HakemistoTest {
     Sanakirja s1;
     Sanakirja s2;
     
-    public HakemistoTest() throws FileNotFoundException {
+    public HakemistoTest() throws FileNotFoundException, IOException {
          s1 = new Sanakirja();
          s2 = new Sanakirja("kissa.txt");
          h = new Hakemisto(new Sanakirja());
@@ -33,10 +34,10 @@ public class HakemistoTest {
     }
     
     @Test
-    public void sanakirjaLisataanVainKerran() throws FileNotFoundException {
+    public void sanakirjaLisataanVainKerran() throws FileNotFoundException, IOException {
         Sanakirja s = new Sanakirja();
-        Sanakirja s2 = new Sanakirja("sanat.txt");
+        Sanakirja s3 = new Sanakirja("sanat.txt");
         h.addSanakirja(s);
-        assertEquals(true, !h.addSanakirja(s2));
+        assertEquals(true, !h.addSanakirja(s3));
     }
 }
