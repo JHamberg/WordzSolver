@@ -23,30 +23,17 @@ public class Sanakirja {
         this(DEFAULT_DICTIONARY);
     }
 
-    public Sanakirja(String polku) throws FileNotFoundException, IOException {
+    public Sanakirja(String polku){
+        this.polku = polku;
+        
         try {
-            FileReader r = new FileReader(polku);
-            BufferedReader lukija = new BufferedReader(r);
-            sanat = alustaSanakirja(lukija);
+            Tiedosto tk = new Tiedosto(polku);
+            sanat = tk.lueListaan();
             
-        } catch (FileNotFoundException e) {   //Jos tiedostoa ei ole 
-            System.out.println("Not found!"); //TBI Graafinen huomautus ja paluu
+        } catch (Exception e) {   //Jos tiedostoa ei ole 
+            System.out.println("File not found!"); //TBI Graafinen huomautus ja paluu
             error = true;
         }
-    }
-
-    private ArrayList<String> alustaSanakirja(BufferedReader r) throws IOException{
-            
-            ArrayList<String> temp = new ArrayList<String>();
-
-            String sana;
-            while ((sana = r.readLine()) != null) {
-                if (sana.length() >= DEFAULT_LENGTH) {
-                    temp.add(sana);
-                }
-            }
-            r.close();
-            return temp;
     }
     
     public boolean getErrorState() {

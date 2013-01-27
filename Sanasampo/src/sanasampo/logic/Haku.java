@@ -14,16 +14,20 @@ import sanasampo.data.Sanakirja;
  * @author Jonatan
  */
 public class Haku {
-    //Hakualgoritmi puuttuu yhä, TBI
 
     Hakemisto h;
     Ruudukko r;
-    ArrayList<String> mahdolliset; //potentiaaliset sanat
+    Syvahaku s;
+    Esitarkastus e;
+    ArrayList<String> mahdolliset, osumat; //potentiaaliset sanat
 
     public Haku(Hakemisto h, Ruudukko r) {
         this.h = h;
         this.r = r;
+        e = new Esitarkastus(r);
+        s = new Syvahaku(r);
         mahdolliset = new ArrayList<String>();
+        osumat = new ArrayList<String>();
     }
 
     public void kaynnista() {
@@ -34,33 +38,33 @@ public class Haku {
 
     private void suoritaHaku(Sanakirja s) {
         eliminoiMahdottomat(s);
-        for (String k : mahdolliset) {
-            System.out.println(k);
-        }
-        System.out.println("mahdolliset size: " + mahdolliset.size());
+        syvaHaku();
     }
 
     private void eliminoiMahdottomat(Sanakirja s) {
         for (String sana : s.getSanat()) {
-            if (esiTarkasta(sana)) {
+            if (e.suorita(sana)) {
                 mahdolliset.add(sana);
             }
         }
     }
     
-    
-    private boolean esiTarkasta(String s) {
-        Ruudukko temp = new Ruudukko(); //Kloonaus
-        temp.alusta(r.getKirjaimet());
-
-        for (int i = 0; i < s.length(); i++) {
-            int x = temp.charSijainti(s.charAt(i))[0];
-            int y = temp.charSijainti(s.charAt(i))[1];
-            if (x == -1 && y == -1) {
-                return false;
+    private void syvaHaku(){
+       for(String k : mahdolliset){
+            if(s.suorita(k)){
+                osumat.add(k);
             }
-            temp.poistaRuutu(x, y);
         }
-        return true;
+        
+        for (String h : osumat) { //Debug
+        }
+    }
+    
+    public ArrayList<String> getTulos(){
+        return osumat;
+    }
+    
+    public ArrayList<String> getMahdolliset(){
+        return mahdolliset;
     }
 }

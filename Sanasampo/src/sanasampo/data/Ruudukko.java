@@ -7,21 +7,6 @@ public class Ruudukko {
     private String ruudukko[][];
     private String kirjaimet;
 
-    public boolean alusta(String k) {
-
-        if (validate(k)) {
-            kirjaimet = k;
-            reuna = (int) Math.sqrt(k.length());
-            ruudukko = new String[reuna][reuna]; //Luodaan AxA kokoinen ruudukko
-            alustaRuudukko();
-            return true;
-
-        } else {
-            return false;
-        }
-
-    }
-
     public int getKoko() {
         return reuna;
     }
@@ -36,6 +21,20 @@ public class Ruudukko {
         }
         long tst = (long) (Math.sqrt(n) + 0.5);
         return tst * tst == n;
+    }
+    
+     public boolean alusta(String k) {
+
+        if (validate(k)) {
+            kirjaimet = k;
+            reuna = (int) Math.sqrt(k.length());
+            ruudukko = new String[reuna][reuna]; //Luodaan AxA kokoinen ruudukko
+            alustaRuudukko();
+            return true;
+
+        } else {
+            return false;
+        }
     }
 
     private void alustaRuudukko() {
@@ -70,17 +69,6 @@ public class Ruudukko {
         return false;
     }
 
-    public boolean containsChar(char ch) {
-        String c = Character.toString(ch); //Käytössä String 
-        for (int i = 0; i < reuna; i++) {
-            for (int j = 0; j < reuna; j++) {
-                if (ruudukko[i][j].equals(c)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
     public int[] charSijainti(char ch) {
         int[] sijainnit = new int[2];
