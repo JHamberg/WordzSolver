@@ -1,19 +1,13 @@
 package sanasampo.data;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-//@author JHamberg
 public class Sanakirja {
 
     //Staattiset
-    private static final String DEFAULT_DICTIONARY = "sanat.txt"; //in main folder 
-    private static final int DEFAULT_LENGTH = 3; //word length
+    private static final String DEFAULT_DICTIONARY = "sanat.txt"; 
     
     private ArrayList<String> sanat;
     private String polku;
@@ -30,8 +24,8 @@ public class Sanakirja {
             Tiedosto tk = new Tiedosto(polku);
             sanat = tk.lueListaan();
             
-        } catch (Exception e) {   //Jos tiedostoa ei ole 
-            System.out.println("File not found!"); //TBI Graafinen huomautus ja paluu
+        } catch (Exception e) {   //Tiedostoa ei löytynyt
+            System.out.println("File not found!"); //TBI
             error = true;
         }
     }
