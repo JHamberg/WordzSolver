@@ -16,4 +16,5 @@ Torstai 24.1.2013, 2h
 Hakualgoritmin esitarkistus, poikkeuksenhallinta, siistintää
 
 Sunnuntai 27.1.2013, 10h
-Ainakin neljä epäonnistunutta hakualgoritmia, luokkarakennetta uudistettu noudattamaan yhden vastuun periaatetta, käyttöliittymää päivitetty ym. muutoksia
+Ainakin neljä epäonnistunutta hakualgoritmia, luokkarakennetta uudistettu noudattamaan yhden vastuun periaatetta, 
+käyttöliittymää päivitetty ym. muutoksia
