@@ -30,7 +30,6 @@ public class RuudukkoPanel extends JPanel{
         System.out.println("koko: "+koko);
          for (int i = 0; i < koko; i++) {
             for (int j = 0; j < koko; j++) {
-             System.out.println("shit happens" + r[i][j]);
                 this.add(new JButton(r[i][j])); //jokaisesta ruudukon alkiosta painike
             }
     }
