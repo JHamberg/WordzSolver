@@ -1,9 +1,17 @@
--Mainin siivoaminen
--Tuki usealle sanakirjalle
--Haku-algoritmin toteutus
--Käyttöliittymä
-	+Sanalista (kaksiosainen)
-	+Sanojen korostus
-	+Menu (sanakirjojen muokkaus/lisääminen)
--Testien temp-tiedostojen poisto
--Lisää testejä
+===================TODO=====================
+
+-Mainin siivoaminen 			[X]
+-Tuki usealle sanakirjalle 		[X]
+-Haku-algoritmin toteutus		[/]
+-Käyttöliittymä				[/]
+	+Sanalista 			[X]
+	+Sanojen korostus 		[_]
+	+Menu 				[/]
+-Testien temp-tiedostojen poisto	[_]
+-Lisää testejä				[_]
+
+[X] = Tehty
+[/] = Osittain
+[_] = Kesken
+
+============================================
