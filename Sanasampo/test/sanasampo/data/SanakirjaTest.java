@@ -10,24 +10,22 @@ import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-// @author JHamberg
-
 public class SanakirjaTest {
-
+    static final String testDir = "test\\sanasampo\\files\\";
+    static final String fileName = "sanakirjaTest.txt";
     Sanakirja s;
     File f;
     Writer output;
 
     public SanakirjaTest() throws FileNotFoundException, IOException {
         s = new Sanakirja();
-        f = new File("temp.txt"); //ISSUE temp is not removed! 
+        f = new File(testDir + fileName); //ISSUE temp is not removed! 
+        f.createNewFile();
         output = new BufferedWriter(new FileWriter(f));
     }
 
-    
     @After
     public void tearDown() {
-        System.out.println("kutsuttu kerran");
         f.delete(); //Tuhotaan TEMP tiedosto testin jalkeen
     }
     
@@ -55,7 +53,7 @@ public class SanakirjaTest {
     public void yksiSanaisenKirjanKoko() throws IOException {
         output.write("abc123");
         output.close();
-        assertEquals(1, new Sanakirja("temp.txt").getKoko());
+        assertEquals(1, new Sanakirja(testDir + fileName).getKoko());
     }
     
     
@@ -64,6 +62,6 @@ public class SanakirjaTest {
         output.write("abc123");
         output.write(System.getProperty("line.separator") + "321cba");
         output.close();
-        assertEquals(2, new Sanakirja("temp.txt").getKoko());
+        assertEquals(2, new Sanakirja(testDir + fileName).getKoko());
     }
 }

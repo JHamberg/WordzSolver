@@ -10,7 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 import sanasampo.data.Ruudukko;
 
-// author JHamberg
+
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;

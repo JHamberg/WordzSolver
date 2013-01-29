@@ -51,5 +51,7 @@ public class KayttoliittymaTest {
     }
     
      @Test
-    public void tbi() {}
+    public void tbi() {
+         
+     }
 }

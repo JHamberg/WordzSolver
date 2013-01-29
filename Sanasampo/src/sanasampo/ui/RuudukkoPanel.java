@@ -10,10 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import sanasampo.data.Ruudukko;
 
-/**
- *
- * @author Jonatan
- */
 public class RuudukkoPanel extends JPanel{
     private int koko;
     String[][] r;

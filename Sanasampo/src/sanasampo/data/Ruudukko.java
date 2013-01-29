@@ -1,11 +1,19 @@
 package sanasampo.data;
 
 // @author JHamberg
+import java.util.regex.Pattern;
+
 public class Ruudukko {
 
+    private Pattern p;
     private int reuna;
     private String ruudukko[][];
     private String kirjaimet;
+
+    public Ruudukko() {
+        //Hyväksytään vain skandinaaviset aakkoset
+        p = Pattern.compile("^[a-zA-Z0-9äöåÅÄÖ]*$", Pattern.CASE_INSENSITIVE);
+    }
 
     public int getKoko() {
         return reuna;
@@ -22,8 +30,8 @@ public class Ruudukko {
         long tst = (long) (Math.sqrt(n) + 0.5);
         return tst * tst == n;
     }
-    
-     public boolean alusta(String k) {
+
+    public boolean alusta(String k) {
 
         if (validate(k)) {
             kirjaimet = k;
@@ -49,8 +57,13 @@ public class Ruudukko {
     }
 
     private boolean validate(String k) {
-        //Muodostaako  AxA-ruudukon, onko syöte tyhjä, sisältääkö välilyöntejä
-        if (!onKahdenPotenssi(k.length()) || k.isEmpty() || k.contains(" ")) {
+        if (k == null) { //Painettu cancel? 
+            System.exit(0);
+        }
+        if (!onKahdenPotenssi(k.length()) //Tasasivuinen ruudukko?
+                || k.isEmpty() //Tyhjä syöte?
+                || k.contains(" ") //Välilyöntejä?
+                || !p.matcher(k).find()) { //Erikoismerkkejä
             return false;
         } else {
             return true;
@@ -69,7 +82,6 @@ public class Ruudukko {
         return false;
     }
 
-
     public int[] charSijainti(char ch) {
         int[] sijainnit = new int[2];
         String c = Character.toString(ch); //Käytössä String 
@@ -86,12 +98,12 @@ public class Ruudukko {
         sijainnit[1] = -1;
         return sijainnit;
     }
-    
-    public Ruudukko kloonaa(){
+
+    public Ruudukko kloonaa() {
         return this;
     }
-    
-    public String getKirjaimet(){
+
+    public String getKirjaimet() {
         return kirjaimet;
     }
 }

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sanasampo;
 
 import java.io.FileNotFoundException;
@@ -22,12 +18,16 @@ public class Sampo {
     String input;
     Haku haku;
 
+    //Konsoliprintit debuggausta varten
+    
     public void kaynnista() throws FileNotFoundException, IOException {
         asenna();
         System.out.println("Prompting user for input..");
         kysyKirjaimet();
         while (!r.alusta(input)) {
-            System.out.println("Invalid grid!\nReturned user to prompt.");
+            System.out.println("Invalid grid!\nDisplaying error message.");
+            JOptionPane.showMessageDialog(null, "Grid size should be equilateral (3x3, 4x4..) and contain no special characters!", "Grid Initialization Error!", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Returned user to prompt");
             kysyKirjaimet();
         }
         System.out.println("Grid input passed!\nStarting search..");

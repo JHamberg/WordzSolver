@@ -25,7 +25,7 @@ public class Sanakirja {
             sanat = tk.lueListaan();
             
         } catch (Exception e) {   //Tiedostoa ei löytynyt
-            System.out.println("File not found!"); //TBI
+            System.out.println("File not found or empty!"); //TBI
             error = true;
         }
     }

@@ -1,16 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sanasampo.ui;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
-/**
- *
- * @author Jonatan
- */
 public class Menu extends JMenuBar{
         JMenu fileMenu, editMenu, viewMenu;
         

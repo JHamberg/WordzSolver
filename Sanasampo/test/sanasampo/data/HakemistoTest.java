@@ -1,23 +1,11 @@
 package sanasampo.data;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.junit.After;
-import org.junit.AfterClass;
 import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-/**
- *
- * @author Jonatan
- */
 public class HakemistoTest {
     Hakemisto h;
     Sanakirja s1;

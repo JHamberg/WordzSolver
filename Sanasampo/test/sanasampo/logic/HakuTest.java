@@ -1,43 +1,39 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sanasampo.logic;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 import static org.junit.Assert.*;
+import org.junit.Test;
+import sanasampo.data.Hakemisto;
+import sanasampo.data.Ruudukko;
+import sanasampo.data.Sanakirja;
 
-/**
- *
- * @author Jonatan
- */
 public class HakuTest {
+    Ruudukko r;
+    Hakemisto h;
+    String ruudukko;
+    Haku haku;
     
-    public HakuTest() {
+    ArrayList<String> tulokset;
+    
+    public HakuTest() throws FileNotFoundException, IOException {
+        r = new Ruudukko();
+        h = new Hakemisto(new Sanakirja());
+        ruudukko = "xxxx"
+                 + "talo"
+                 + "xxxx"
+                 + "xxxx";
+         r.alusta(ruudukko);
+        haku = new Haku(h, r);
+        haku.kaynnista();
+        tulokset = haku.getTulos();
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-    
+
     @Test
-    public void kesken() {
-        System.out.println("EtsijaTest - TBI");
+    public void hakuLoytaaOikeatSanat() {
+        assertEquals(true, haku.getTulos().contains("talo"));
     }
+    
+    
 }
