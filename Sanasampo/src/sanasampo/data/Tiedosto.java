@@ -20,24 +20,20 @@ public class Tiedosto {
     public Tiedosto(String polku) throws FileNotFoundException, UnsupportedEncodingException {
         file = new File(polku);
         fr = new FileReader(polku);
-      
-        //br = new BufferedReader(fr);
     }
 
     public ArrayList<String> lueListaan() throws IOException, FileEmptyException {
-        br = new BufferedReader(
-                new InputStreamReader(new FileInputStream(file), "ISO-8859-1"));
+        br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "ISO-8859-1"));
         ArrayList<String> temp = new ArrayList<String>();
-        
         String sana;
+        
         while ((sana = br.readLine()) != null) {
             if (sana.length() >= 3) {
                 temp.add(sana);
             }
         }
-        if(temp.isEmpty()){
-           throw new FileEmptyException("File is empty!");
-        }
+        if(temp.isEmpty()){throw new FileEmptyException("File is empty!");}
+        
         br.close();
         return temp;
     }
