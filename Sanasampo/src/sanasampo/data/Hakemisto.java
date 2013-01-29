@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class Hakemisto {
     private ArrayList<Sanakirja> hakemisto;
+    
     public Hakemisto(Sanakirja perus){
         hakemisto = new ArrayList<Sanakirja>();
         hakemisto.add(perus);

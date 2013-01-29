@@ -12,11 +12,11 @@ import sanasampo.ui.Kayttoliittyma;
 
 public class Sampo {
 
-    Kayttoliittyma ui;
-    Hakemisto h;
-    Ruudukko r;
-    String input;
-    Haku haku;
+    private Kayttoliittyma ui;
+    private Hakemisto h;
+    private Ruudukko r;
+    private String input;
+    private Haku haku;
 
     //Konsoliprintit debuggausta varten
     

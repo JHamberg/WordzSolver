@@ -15,11 +15,11 @@ import sanasampo.data.Sanakirja;
  */
 public class Haku {
 
-    Hakemisto h;
-    Ruudukko r;
-    Syvahaku s;
-    Esitarkastus e;
-    ArrayList<String> mahdolliset, osumat; //potentiaaliset sanat
+    private Hakemisto h;
+    private Ruudukko r;
+    private Syvahaku s;
+    private Esitarkastus e;
+    private ArrayList<String> mahdolliset, osumat; //potentiaaliset sanat
 
     public Haku(Hakemisto h, Ruudukko r) {
         this.h = h;

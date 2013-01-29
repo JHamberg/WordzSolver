@@ -12,7 +12,7 @@ import sanasampo.data.Ruudukko;
 
 public class RuudukkoPanel extends JPanel{
     private int koko;
-    String[][] r;
+    private String[][] r;
     
     public RuudukkoPanel(int x, int y, Ruudukko grid){
         super(new GridLayout(x, y));

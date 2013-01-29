@@ -4,7 +4,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
 public class Menu extends JMenuBar{
-        JMenu fileMenu, editMenu, viewMenu;
+    private JMenu fileMenu, editMenu, viewMenu;
         
      public Menu(){
          fileMenu = new JMenu("File");

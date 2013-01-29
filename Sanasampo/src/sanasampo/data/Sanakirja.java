@@ -7,8 +7,7 @@ import java.util.ArrayList;
 public class Sanakirja {
 
     //Staattiset
-    private static final String DEFAULT_DICTIONARY = "sanat.txt"; 
-    
+    private static final String DEFAULT_DICTIONARY = "sanat.txt";
     private ArrayList<String> sanat;
     private String polku;
     private boolean error = false;
@@ -17,19 +16,17 @@ public class Sanakirja {
         this(DEFAULT_DICTIONARY);
     }
 
-    public Sanakirja(String polku){
+    public Sanakirja(String polku) {
         this.polku = polku;
-        
+
         try {
             Tiedosto tk = new Tiedosto(polku);
             sanat = tk.lueListaan();
-            
         } catch (Exception e) {   //Tiedostoa ei löytynyt
-            System.out.println("File not found or empty!"); //TBI
             error = true;
         }
     }
-    
+
     public boolean getErrorState() {
         return error; //TBI workaround
     }

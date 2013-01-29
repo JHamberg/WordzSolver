@@ -5,7 +5,7 @@ import sanasampo.data.Ruudukko;
 //Tarkistaa, löytyykö ruudukosta edes tarpeeksi kirjaimia sanan muodostamiseen
 
 public class Esitarkastus {
-    Ruudukko ruudukko;
+    private Ruudukko ruudukko;
     
     public Esitarkastus(Ruudukko ruudukko){
         this.ruudukko = ruudukko;
