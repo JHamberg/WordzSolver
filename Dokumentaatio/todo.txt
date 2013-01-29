@@ -7,8 +7,8 @@
 	+Sanalista 			[X]
 	+Sanojen korostus 		[_]
 	+Menu 				[/]
--Testien temp-tiedostojen poisto	[_]
--Lis‰‰ testej‰				[_]
+-Testien temp-tiedostojen poisto	[X]
+-Lis‰‰ testej‰				[/]
 
 [X] = Tehty
 [/] = Osittain
