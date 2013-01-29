@@ -20,4 +20,5 @@ Ainakin neljä epäonnistunutta hakualgoritmia, luokkarakennetta uudistettu noudat
 käyttöliittymää päivitetty ym. muutoksia
 
 Tiistai 28.1.2013, 3h
-Tarvittavia JUnit-testejä lisätty n. 10, kehitetty poikkeuksenhallintaa, parannettu ruudukon validointia (null-testi), jatkettu käyttöliittymää hieman, siirretty testitiedostot omaan kansioons.
+Tarvittavia JUnit-testejä lisätty n. 10, kehitetty poikkeuksenhallintaa, parannettu ruudukon validointia (null-testi), 
+jatkettu käyttöliittymää hieman, siirretty testitiedostot omaan kansioons.
