@@ -20,6 +20,9 @@ Sunnuntai 27.1.2013, 10h
 Ainakin neljä epäonnistunutta hakualgoritmia, luokkarakennetta uudistettu noudattamaan yhden vastuun periaatetta, 
 käyttöliittymää päivitetty ym. muutoksia
 
-Tiistai 28.1.2013, 3h
+Tiistai 29.1.2013, 3h
 Tarvittavia JUnit-testejä lisätty n. 10, kehitetty poikkeuksenhallintaa, parannettu ruudukon validointia (null-testi), 
 jatkettu käyttöliittymää hieman, siirretty testitiedostot omaan kansioons.
+
+Keskiviikko 30.1.2013, 7h
+Toteutettu hakualgoritmi loppuun, muokattu käyttöliittymää
