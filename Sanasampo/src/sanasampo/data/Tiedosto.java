@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -13,17 +12,17 @@ import sanasampo.lang.FileEmptyException;
 
 public class Tiedosto {
 
-    private FileReader fr;
     private BufferedReader br;
     private File file;
 
     public Tiedosto(String polku) throws FileNotFoundException, UnsupportedEncodingException {
         file = new File(polku);
-        fr = new FileReader(polku);
     }
 
     public ArrayList<String> lueListaan() throws IOException, FileEmptyException {
-        br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "ISO-8859-1"));
+        
+        //ISO-8859-1 tukee ääkkösiä
+        br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "ISO-8859-1")); 
         ArrayList<String> temp = new ArrayList<String>();
         String sana;
         
@@ -32,6 +31,7 @@ public class Tiedosto {
                 temp.add(sana);
             }
         }
+        
         if(temp.isEmpty()){throw new FileEmptyException("File is empty!");}
         
         br.close();

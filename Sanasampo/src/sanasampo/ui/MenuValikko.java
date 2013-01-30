@@ -2,11 +2,17 @@ package sanasampo.ui;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import sanasampo.Sampo;
 
-public class Menu extends JMenuBar{
+public class MenuValikko extends JMenuBar{
     private JMenu fileMenu, editMenu, viewMenu;
+    private Sampo s;
+    private Kayttoliittyma ui;
         
-     public Menu(){
+     public MenuValikko(Sampo sa, Kayttoliittyma u){
+         s = sa;
+         ui = u;
+         
          fileMenu = new JMenu("File");
          editMenu = new JMenu("Edit");
          viewMenu = new JMenu("View");
@@ -22,7 +28,7 @@ public class Menu extends JMenuBar{
      }
      
      private void lisaaValinta(JMenu menu, String valinta){
-         menu.add(valinta);
+         menu.add(valinta).addActionListener(new ValikkoKuuntelija(s, ui));
      }
      
      private void lisaaValinnat(){

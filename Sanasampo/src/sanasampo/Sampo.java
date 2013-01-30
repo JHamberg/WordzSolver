@@ -17,29 +17,21 @@ public class Sampo {
     private Ruudukko r;
     private String input;
     private Haku haku;
-
-    //Konsoliprintit debuggausta varten
     
     public void kaynnista() throws FileNotFoundException, IOException {
-        asenna();
-        System.out.println("Prompting user for input..");
         kysyKirjaimet();
         while (!r.alusta(input)) {
-            System.out.println("Invalid grid!\nDisplaying error message.");
-            JOptionPane.showMessageDialog(null, "Grid size should be equilateral (3x3, 4x4..) and contain no special characters!", "Grid Initialization Error!", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println("Returned user to prompt");
+            JOptionPane.showMessageDialog(null, 
+                    "Grid size should be equilateral (3x3, 4x4..) and contain no special characters!", 
+                    "Grid Initialization Error!", JOptionPane.INFORMATION_MESSAGE);
             kysyKirjaimet();
         }
-        System.out.println("Grid input passed!\nStarting search..");
         hae();
-        System.out.println("Search finished succesfully!\nRendering GUI..");
         nayta();
     }
 
-    private void asenna() throws FileNotFoundException, IOException {
-        System.out.println("Loading dictionaries..");
+    public void asenna() throws FileNotFoundException, IOException {
         h = new Hakemisto(new Sanakirja());
-        System.out.println("Dictionaries loaded!");
         r = new Ruudukko();
     }
 
@@ -53,8 +45,7 @@ public class Sampo {
     }
 
     private void nayta() {
-        ui = new Kayttoliittyma(r, haku.getTulos());
+        ui = new Kayttoliittyma(r, haku.getTulos(), haku.getHitlist(), this);
         SwingUtilities.invokeLater(ui);
-        System.out.println("GUI Rendered!");
     }
 }

@@ -30,7 +30,7 @@ public class KayttoliittymaTest {
        r.alusta("abcdefghi");
        Haku haku = new Haku(h, r);
        haku.kaynnista();
-       ui = new Kayttoliittyma(r, haku.getMahdolliset());
+       ui = new Kayttoliittyma(r, haku.getMahdolliset(), haku.getHitlist());
        SwingUtilities.invokeLater(ui);
     }
     

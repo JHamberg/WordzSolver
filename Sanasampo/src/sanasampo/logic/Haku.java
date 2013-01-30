@@ -1,33 +1,27 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sanasampo.logic;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 import sanasampo.data.Hakemisto;
 import sanasampo.data.Ruudukko;
 import sanasampo.data.Sanakirja;
 
-/**
- *
- * @author Jonatan
- */
+
 public class Haku {
 
+    private TreeMap<String, ArrayList<String>> hitlist;
     private Hakemisto h;
-    private Ruudukko r;
     private Syvahaku s;
     private Esitarkastus e;
     private ArrayList<String> mahdolliset, osumat; //potentiaaliset sanat
 
     public Haku(Hakemisto h, Ruudukko r) {
         this.h = h;
-        this.r = r;
         e = new Esitarkastus(r);
         s = new Syvahaku(r);
         mahdolliset = new ArrayList<String>();
         osumat = new ArrayList<String>();
+        hitlist = new TreeMap<String, ArrayList<String>>();
     }
 
     public void kaynnista() {
@@ -39,6 +33,7 @@ public class Haku {
     private void suoritaHaku(Sanakirja s) {
         eliminoiMahdottomat(s);
         syvaHaku();
+        
     }
 
     private void eliminoiMahdottomat(Sanakirja s) {
@@ -53,10 +48,8 @@ public class Haku {
        for(String k : mahdolliset){
             if(s.suorita(k)){
                 osumat.add(k);
+                hitlist.put(k, s.getPolku());
             }
-        }
-        
-        for (String h : osumat) { //Debug
         }
     }
     
@@ -66,5 +59,9 @@ public class Haku {
     
     public ArrayList<String> getMahdolliset(){
         return mahdolliset;
+    }
+    
+    public TreeMap<String, ArrayList<String>> getHitlist(){
+        return hitlist;
     }
 }

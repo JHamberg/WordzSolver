@@ -2,6 +2,7 @@ package sanasampo.data;
 
 // @author JHamberg
 import java.util.regex.Pattern;
+import sanasampo.logic.Helper;
 
 public class Ruudukko {
 
@@ -9,10 +10,13 @@ public class Ruudukko {
     private int reuna;
     private String ruudukko[][];
     private String kirjaimet;
+    private Helper h; 
 
     public Ruudukko() {
+        
         //Hyväksytään vain skandinaaviset aakkoset
         p = Pattern.compile("^[a-zA-Z0-9äöåÅÄÖ]*$", Pattern.CASE_INSENSITIVE);
+        h = new Helper();
     }
 
     public int getKoko() {
@@ -21,14 +25,6 @@ public class Ruudukko {
 
     public String[][] getRuudukko() {
         return ruudukko;
-    }
-
-    private static boolean onKahdenPotenssi(long n) {
-        if (n < 0) {
-            return false;
-        }
-        long tst = (long) (Math.sqrt(n) + 0.5);
-        return tst * tst == n;
     }
 
     public boolean alusta(String k) {
@@ -60,7 +56,7 @@ public class Ruudukko {
         if (k == null) { //Painettu cancel? 
             System.exit(0);
         }
-        if (!onKahdenPotenssi(k.length()) //Tasasivuinen ruudukko?
+        if (!h.onKahdenPotenssi(k.length()) //Tasasivuinen ruudukko?
                 || k.isEmpty() //Tyhjä syöte?
                 || k.contains(" ") //Välilyöntejä?
                 || !p.matcher(k).find()) { //Erikoismerkkejä
