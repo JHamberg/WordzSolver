@@ -9,6 +9,7 @@
 	+Menu 				[/]
 -Testien temp-tiedostojen poisto	[X]
 -Lis‰‰ testej‰				[/]
+-JavaDoc				[/]
 
 [X] = Tehty
 [/] = Osittain
