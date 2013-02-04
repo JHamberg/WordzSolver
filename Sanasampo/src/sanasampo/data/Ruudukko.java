@@ -4,17 +4,33 @@ package sanasampo.data;
 import java.util.regex.Pattern;
 import sanasampo.logic.Helper;
 
+/** Käyttäjän antamasta syötteestä luotu kirjainruudukko, josta 
+ * voidaan hakea ja poistaa kirjaimia.<br> Ruudukon alustukseen liittyy
+ * olennaisesti syötteen validointi.
+ */
+
 public class Ruudukko {
 
+    /** Pattern ruudukon validointia varten*/
     private Pattern p;
+    
+    /** Ruudukon reunan pituus */
     private int reuna;
+    
+    /** Kaksiulotteinen array, johon kirjaimet luetaan*/
     private String ruudukko[][];
+    
+    /** Ruudukon sisältämät kirjaimet*/
     private String kirjaimet;
-    private Helper h; 
+    
+    /** Apuluokka ruudukon muodon tarkistamiseksi*/
+    private Helper h;
 
+    /** Konstruktori alustaa patternin, joka sisältää ehdon ruudukon
+     * hyväksytyistä merkeistä (a-ö), sekä apuluokan
+     * {@link sanasampo.logic.Helper} 
+     */
     public Ruudukko() {
-        
-        //Hyväksytään vain skandinaaviset aakkoset
         p = Pattern.compile("^[a-zA-Z0-9äöåÅÄÖ]*$", Pattern.CASE_INSENSITIVE);
         h = new Helper();
     }
@@ -27,6 +43,14 @@ public class Ruudukko {
         return ruudukko;
     }
 
+    /**
+     * Validoi parametrina saadut kirjaimet ja alustaa ruudukon niillä
+     *
+     * @param k Käyttäjän antamat ruudukon kirjaimet
+     * @return True jos alustus onnistui, false jos ei
+     * @see sanasampo.data.Ruudukko#alustaRuudukko()
+     * @see sanasampo.data.Ruudukko#validate(String)
+     */
     public boolean alusta(String k) {
 
         if (validate(k)) {
@@ -41,17 +65,27 @@ public class Ruudukko {
         }
     }
 
+    /**
+     * Lukee käyttäjän antamat kirjaimet {@link #ruudukko}-muuttujaan
+     */
     private void alustaRuudukko() {
         int pituus = 0;
         for (int i = 0; i < reuna; i++) {
             for (int j = 0; j < reuna; j++) {
-                //Lisätään käyttäjän antamat kirjaimet ruudukkoon
                 ruudukko[i][j] = Character.toString(kirjaimet.charAt(pituus));
                 pituus++;
             }
         }
     }
 
+    /**
+     * Tarkistaa, että parametrina saatu käyttäjän syöte ei ole tyhjä, sisällä
+     * kiellettyjä merkkejä tai ole väärän kokoinen.
+     *
+     * @param k Käyttäjän antamat kirjaimet
+     * @return True jos validointi menee läpi, false jos ei
+     * @see sanasampo.logic.Helper#onKahdenPotenssi(long)
+     */
     private boolean validate(String k) {
         if (k == null) { //Painettu cancel? 
             System.exit(0);
@@ -66,6 +100,13 @@ public class Ruudukko {
         }
     }
 
+    /**
+     * Asettaa ruudukon solun [a,b] tyhjäksi osana {@link sanasampo.logic.Esitarkastus}-prosessia
+     * 
+     * @param a Solun y koordinaati
+     * @param b Solun x koordinaati
+     * @return True jos solu löytyi ja poistettiin, false jos ei
+     */
     public boolean poistaRuutu(int a, int b) {
         for (int i = 0; i < reuna; i++) {
             for (int j = 0; j < reuna; j++) {
@@ -78,6 +119,14 @@ public class Ruudukko {
         return false;
     }
 
+    /**
+     * Palauttaa sen ruudun, josta parametrina saatu kirjain löytyy.
+     * Haku tapahtuu iteroimalla ruudukko läpi. <br>Kirjaimen löytyessä
+     * talletetaan solun x- ja y-koordinaatit taulukkoon. 
+     * 
+     * @param ch Etsittävä kirjain
+     * @return Kaksialkioinen lista, joka sisältää solun koordinaatit
+     */
     public int[] charSijainti(char ch) {
         int[] sijainnit = new int[2];
         String c = Character.toString(ch); //Käytössä String 
@@ -95,6 +144,11 @@ public class Ruudukko {
         return sijainnit;
     }
 
+    /**
+     * Palauttaa kopion oliosta
+     * 
+     * @return Ruudukko-olio
+     */
     public Ruudukko kloonaa() {
         return this;
     }

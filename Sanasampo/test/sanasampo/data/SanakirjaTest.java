@@ -41,7 +41,7 @@ public class SanakirjaTest {
 
     @Test
     public void alustusIlmanParametriaToimii() throws FileNotFoundException, IOException{
-        assertEquals(true, !(new Sanakirja().getPolku().isEmpty()));
+        assertEquals(true, !(new Sanakirja().getTiedostoPolku().isEmpty()));
     }
 
     @Test

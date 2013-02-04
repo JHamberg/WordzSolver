@@ -10,15 +10,33 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import sanasampo.lang.FileEmptyException;
 
+
+/** Tiedostojen peruskäsittely. Sisällön listaan lukeminen. */
+
 public class Tiedosto {
 
+    /** Tiedostonlukija*/
     private BufferedReader br;
+    
+    /**Käsiteltävä tiedosto*/
     private File file;
 
+    /**
+     * Konstruktori alustaa {@link sanasampo.data.Tiedosto#file}-olion polulla,
+     * jonka metodi saa parametrina. 
+     * 
+     * @param polku Tiedostopolku
+     */
     public Tiedosto(String polku) throws FileNotFoundException, UnsupportedEncodingException {
         file = new File(polku);
     }
 
+    /**
+     * Iteroi tiedoston lukien jokaisen rivin listaan. Tukee 
+     * <a href="http://fi.wikipedia.org/wiki/ISO_8859-1"> ISO-8859-1</a>-merkistöä.
+     * 
+     * @return Tiedostosta luetut sanat listana
+     */
     public ArrayList<String> lueListaan() throws IOException, FileEmptyException {
         
         //ISO-8859-1 tukee ääkkösiä
@@ -38,6 +56,7 @@ public class Tiedosto {
         return temp;
     }
     
+    /** Palauttaa totuusarvon tiedoston olemassaolosta */
     public boolean exists(){
         return file.exists();
     }

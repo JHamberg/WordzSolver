@@ -1,30 +1,37 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sanasampo.data;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Jonatan
- */
+/** Sisältää listan sanakirjoja ja niiden hallintaan tarvittavat metodit. */
+
 public class Hakemisto {
+    
+    /** Lista johon  {@link sanasampo.data.Sanakirja}-oliot talletetaan */
     private ArrayList<Sanakirja> hakemisto;
     
-    public Hakemisto(Sanakirja perus){
+    /** Parametrillinen konstruktori alustaa hakemiston ja lisää
+     * siihen parametrina saadun Sanakirjan 
+     * @param oletus Oletuksena käytettävä sanakirja 
+     * @see sanasampo.data.Sanakirja
+     */
+    public Hakemisto(Sanakirja oletus){
         hakemisto = new ArrayList<Sanakirja>();
-        hakemisto.add(perus);
+        hakemisto.add(oletus);
     }
     
+    /** Toimii kuten {@link #Hakemisto(Sanakirja)}
+     * mutta alustettuun hakemistoon ei lisätä sanakirjaa.*/
     public Hakemisto(){
         hakemisto = new ArrayList<Sanakirja>();
     }
     
+    /** Lisää parametrina saadun sanakirjan hakemistoon. <br>
+     * Tarkistetaan myös ettei lisättävä olio löydy jo hakemistosta.
+     @see sanasampo.data.Sanakirja#getTiedostoPolku()
+     @param sanakirja Lisättävä sanakirja*/
     public boolean addSanakirja(Sanakirja sanakirja){
         for(Sanakirja s : hakemisto){
-            if (s.getPolku().equals(sanakirja.getPolku())){ //Polku on uniikki jokaiselle
+            if (s.getTiedostoPolku().equals(sanakirja.getTiedostoPolku())){ //Polku on uniikki jokaiselle
                 return false;
             }
         }

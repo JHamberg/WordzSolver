@@ -4,18 +4,44 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+ /**
+  * Varastoi käyttäjän valitsemasta tai oletuksena olevasta tiedostosta 
+  * luetut sanat ArrayList-tyyppiin. <br>Tarjoaa perustoiminnallisuudet 
+  * sanakirjan hallintaa varten. 
+  */
+
 public class Sanakirja {
 
-    //Staattiset
+    /** Oletuksena alustamiseen käytetty tiedostopolku*/
     private static final String DEFAULT_DICTIONARY = "sanat.txt";
+    
+    /** Lista johon sanat luetaan tekstitiedostosta*/
     private ArrayList<String> sanat;
+    
+    /** Luettavan sanatiedoston tiedostopolku*/
     private String polku;
+    
+    /**Virhetilan totuusarvo*/
     private boolean error = false;
 
+    /**
+     * Parametriton konstruktori kutsuu (kuormitettua) itseään oletuksena
+     * olevalla tiedostopolulla, joka on määritelty muuttujaosiossa.
+     *
+     * @see sanasampo.data.Sanakirja#DEFAULT_DICTIONARY
+     */
     public Sanakirja() throws FileNotFoundException, IOException {
         this(DEFAULT_DICTIONARY);
     }
 
+    /**
+     * Konstruktori alustaa sanalistan lukemalla sanoja tekstitiedostosta, 
+     * käyttäen luokkaa {@link sanasampo.data.Tiedosto} tiedostonhallintaan.
+     * Tekstitiedosto metodille parametrina annetusta tiedostopolusta.
+     
+     * @param polku Käyttäjän antama tiedostopolku
+     * @see sanasampo.data.Tiedosto#lueListaan()
+     */
     public Sanakirja(String polku) {
         this.polku = polku;
 
@@ -31,7 +57,7 @@ public class Sanakirja {
         return error; //TBI workaround
     }
 
-    public String getPolku() {
+    public String getTiedostoPolku() {
         return this.polku;
     }
 
