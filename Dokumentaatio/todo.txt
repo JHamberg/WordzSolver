@@ -7,6 +7,7 @@
 	+Sanalista 			[X]
 	+Sanojen korostus 		[X]
 	+Menu 				[/]
+	+Ikkunan skaalautuvuus 		[ ]
 -Testien temp-tiedostojen poisto	[X]
 -Lis‰‰ testej‰				[/]
 -JavaDoc				[/]
