@@ -12,6 +12,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import sanasampo.Sampo;
 import sanasampo.data.Hakemisto;
 import sanasampo.data.Ruudukko;
 import sanasampo.data.Sanakirja;
@@ -28,9 +29,10 @@ public class KayttoliittymaTest {
        Hakemisto h = new Hakemisto(new Sanakirja());
        Ruudukko r = new Ruudukko();
        r.alusta("abcdefghi");
+       Sampo s = new Sampo();
        Haku haku = new Haku(h, r);
        haku.kaynnista();
-       ui = new Kayttoliittyma(r, haku.getMahdolliset(), haku.getHitlist());
+       ui = new Kayttoliittyma(r, haku.getMahdolliset(), haku.getHitlist(), s);
        SwingUtilities.invokeLater(ui);
     }
     
