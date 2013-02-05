@@ -2,6 +2,7 @@ package sanasampo;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import sanasampo.data.Hakemisto;
@@ -31,11 +32,13 @@ public class Sampo {
     
     /** Kysyy käyttäjältä kirjaimet, pyrkii alustamaan niillä ruudukon ja näyttää
      * virhedialogin validoinnin epäonnistuessa. Aloittaa haun ja kutsuu esiin 
-     * käyttöliittymän. 
+     * käyttöliittymän. Jos parametri löytyy koitetaan alustaa sillä. 
      * @see sanasampo.data.Ruudukko#validate(String)
      */
-    public void kaynnista() throws FileNotFoundException, IOException {
-        kysyKirjaimet();
+     public void kaynnista(String k){
+        if(k.isEmpty()) kysyKirjaimet();
+        else input = k;
+        
         while (!r.alusta(input)) {
             JOptionPane.showMessageDialog(null, 
                     "Grid size should be equilateral (3x3, 4x4..) and contain no special characters!", 
@@ -46,6 +49,14 @@ public class Sampo {
         nayta();
     }
 
+    /**Parametriton konstruktori välittää kuormitetulle konstruktorille 
+     * tyhjän merkkijonon
+     */
+    public void kaynnista() throws FileNotFoundException, IOException {
+       kaynnista("");
+    }
+    
+   
     /** Alustaa hakemiston ja ruudukon */
     public void asenna() throws FileNotFoundException, IOException {
         h = new Hakemisto(new Sanakirja());
@@ -68,5 +79,13 @@ public class Sampo {
     private void nayta() {
         ui = new Kayttoliittyma(r, haku.getTulos(), haku.getHitlist(), this);
         SwingUtilities.invokeLater(ui);
+    }
+    
+    public ArrayList<String> haeTulos(){
+        return haku.getTulos();
+    }
+    
+    public Kayttoliittyma haeUi(){
+        return ui;
     }
 }

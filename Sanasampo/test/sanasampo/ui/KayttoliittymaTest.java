@@ -12,6 +12,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import sanasampo.Sampo;
 import sanasampo.data.Hakemisto;
 import sanasampo.data.Ruudukko;
@@ -28,7 +29,7 @@ public class KayttoliittymaTest {
     public KayttoliittymaTest() throws FileNotFoundException, IOException {
        Hakemisto h = new Hakemisto(new Sanakirja());
        Ruudukko r = new Ruudukko();
-       r.alusta("abcdefghi");
+       r.alusta("kissakoiratalomo");
        Sampo s = new Sampo();
        Haku haku = new Haku(h, r);
        haku.kaynnista();
@@ -36,24 +37,8 @@ public class KayttoliittymaTest {
        SwingUtilities.invokeLater(ui);
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-    
      @Test
     public void tbi() {
-         
+        
      }
 }
