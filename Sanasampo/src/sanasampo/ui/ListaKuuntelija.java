@@ -10,23 +10,39 @@ import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-/**
- *
- * @author Jonatan
+/** Tarkistaa, onko käyttäjä valinnut sanan {@link sanasampo.ui.Kayttoliittyma#list}-elementistä
+ * ja päivittää {@link sanasampo.ui.RuudukkoPanel}-näkymän. <br> Korostaa sanan muodostamiseen 
+ * tarvittavat kirjaimet. 
  */
 public class ListaKuuntelija implements ListSelectionListener{
-    private JList list;
-    private String selection;
-    private RuudukkoPanel rp;
-    TreeMap<String, ArrayList<String>> hitlist;
     
+    /** Lista hakutuloksista*/ 
+    private JList list;
+    
+    /** Valitun elementin tekstiarvo*/
+    private String selection;
+    
+    /** Visuaalinen ruudukkoelementti */
+    private RuudukkoPanel rp;
+    
+    /** Lista löytyneistä sanoista polkuineen */
+    TreeMap<String, ArrayList<String>> osumat;
+    
+    /** Konstruktori joka alustaa listan, ruudukkopanelin ja hakutuloslistan 
+     *@param l Lista hakutuloksista
+     *@param p Ruudukko-elementti korostusta varten
+     *@param h Hakutuloslista polkuineen
+     */
     public ListaKuuntelija(JList l, RuudukkoPanel p, TreeMap<String, ArrayList<String>> h){
         list = l;
         rp = p;
-        hitlist = h;
+        osumat = h;
     }
     
     
+    /** Kutsuu valinnan muutoksen seurauksena 
+     * {@link sanasampo.ui.RuudukkoPanel#korostaPolku(String, TreeMap)} elementtiä
+     * valitun listaelementin tekstiarvolla*/
     @Override
     public void valueChanged(ListSelectionEvent lse) {
         
@@ -34,7 +50,7 @@ public class ListaKuuntelija implements ListSelectionListener{
            selection = (String) list.getSelectedValue();  //Haetaan valittu sana
            
            if(selection != null){
-             rp.highlight(selection, hitlist);  //Korostetaan ruudukosta
+             rp.korostaPolku(selection, osumat);  //Korostetaan ruudukosta
            }
        }  
     }

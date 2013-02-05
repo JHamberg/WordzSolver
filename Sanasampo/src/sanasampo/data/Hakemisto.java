@@ -1,3 +1,4 @@
+/** Tiedon- ja tiedostojenhallinta */
 package sanasampo.data;
 
 import java.util.ArrayList;
