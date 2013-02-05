@@ -9,12 +9,12 @@
 	+Menu 				[/]
 	+Ikkunan skaalautuvuus 		[ ]
 -Testien temp-tiedostojen poisto	[X]
--Lis‰‰ testej‰				[/]
--JavaDoc				[/]
+-Lis‰‰ testej‰				[X]
+-JavaDoc				[X]
 
 [X] = Tehty
 [/] = Osittain
 [_] = Kesken
 
-Edestyminen: ~90%
+Edestyminen: ~92%
 ============================================
