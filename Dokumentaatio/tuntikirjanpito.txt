@@ -30,5 +30,5 @@ Toteutettu hakualgoritmi loppuun, muokattu käyttöliittymää
 Maanantai 4.2.2013, 3h
 Luotu JavaDoc data-pakkaukselle, siistitty kansiorakennetta
 
-Tiistai 5.2.2013, 5h
-Tehty JavaDoc loppuun, lisätty runsaasti JUnit-testejä
+Tiistai 5.2.2013, 7h
+Tehty JavaDoc loppuun, lisätty runsaasti JUnit-testejä, päivitetty dokumentaatiota (2 sekvenssikaaviota)
