@@ -1,15 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sanasampo.lang;
 
-/**
- *
- * @author Jonatan
- */
+
+/** Poikkeusten käsittely tyhjiä tiedostoja varten */
 public class FileEmptyException extends Exception {
 
+    /** Tulostaa parametrina saadun virheilmoituksen*/
     public FileEmptyException(String message) {
         super(message);
     }
