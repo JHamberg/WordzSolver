@@ -3,11 +3,10 @@
 -Mainin siivoaminen 			[X]
 -Tuki usealle sanakirjalle 		[X]
 -Haku-algoritmin toteutus		[X]
--Käyttöliittymä				[/]
+-Käyttöliittymä				[X]
 	+Sanalista 			[X]
 	+Sanojen korostus 		[X]
-	+Menu 				[/]
-	+Ikkunan skaalautuvuus 		[ ]
+	+Menu 				[X]
 -Testien temp-tiedostojen poisto	[X]
 -Lisää testejä				[X]
 -JavaDoc				[X]
@@ -16,5 +15,5 @@
 [/] = Osittain
 [_] = Kesken
 
-Edestyminen: ~92%
+Edestyminen: ~99%
 ============================================
