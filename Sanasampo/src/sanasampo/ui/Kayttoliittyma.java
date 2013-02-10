@@ -128,7 +128,7 @@ public class Kayttoliittyma implements Runnable {
         JOptionPane.showMessageDialog(frame, "<html><h3>About program</h3>"
                 + "<font size=-2>"
                 + "Author: JHamberg<br>"
-                + "Version: 1.0b Beta<br>"
+                + "Version: Beta Release 2 (BR2)<br>"
                 + "Contact: JHamberg@Outlook.com<br><br>"
                 + "Copyright (C) 2013"
                 + "</font></html>");

@@ -24,11 +24,17 @@ Tiistai 29.1.2013, 3h
 Tarvittavia JUnit-testejä lisätty n. 10, kehitetty poikkeuksenhallintaa, parannettu ruudukon validointia (null-testi), 
 jatkettu käyttöliittymää hieman, siirretty testitiedostot omaan kansioons.
 
-Keskiviikko 30.1.2013, 7h
-Toteutettu hakualgoritmi loppuun, muokattu käyttöliittymää
+Keskiviikko 30.1.2013, 7h (Beta Release 1)
+Toteutettu hakualgoritmi loppuun, muokattu käyttöliittymää.
 
 Maanantai 4.2.2013, 3h
 Luotu JavaDoc data-pakkaukselle, siistitty kansiorakennetta
 
 Tiistai 5.2.2013, 7h
 Tehty JavaDoc loppuun, lisätty runsaasti JUnit-testejä, päivitetty dokumentaatiota (2 sekvenssikaaviota)
+
+Lauantai 9.2.2013, 2h
+Suunnittelua, pieniä muutoksia.
+
+Sunnuntai 10.2.2013, 10h (Beta Release 2) 
+Toteutettu käyttöliittymä loppuun, lisätty mahdollisuus vaihtaa sanakirjaa, päivitetty testit. Useita muutoksia.
