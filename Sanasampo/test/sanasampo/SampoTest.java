@@ -4,6 +4,7 @@
  */
 package sanasampo;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,6 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import sanasampo.lang.FileEmptyException;
 
 /**
  *
@@ -40,9 +42,9 @@ public class SampoTest {
     }
     
     @Test
-    public void sampoHoitaaKaiken() throws IOException {
+    public void sampoHoitaaKaiken() throws IOException, FileNotFoundException, FileEmptyException {
         s.asenna();
         s.kaynnista("aina");
-        assertEquals(true, s.haeTulos().contains("aina"));
+        assertEquals(true, s.getTulos().contains("aina"));
     }
 }

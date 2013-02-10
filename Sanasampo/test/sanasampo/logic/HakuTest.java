@@ -8,6 +8,7 @@ import org.junit.Test;
 import sanasampo.data.Hakemisto;
 import sanasampo.data.Ruudukko;
 import sanasampo.data.Sanakirja;
+import sanasampo.lang.FileEmptyException;
 
 public class HakuTest {
     Ruudukko r;
@@ -17,7 +18,7 @@ public class HakuTest {
     
     ArrayList<String> tulokset;
     
-    public HakuTest() throws FileNotFoundException, IOException {
+    public HakuTest() throws FileNotFoundException, IOException, FileEmptyException {
         r = new Ruudukko();
         h = new Hakemisto(new Sanakirja());
         ruudukko = "xxxx"

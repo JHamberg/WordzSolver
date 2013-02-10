@@ -8,19 +8,14 @@ import sanasampo.Sampo;
  * valintaan liittyvät operaatiot. 
  */
 public class ValikkoKuuntelija implements ActionListener {
-
-    /** Yläluokka uudelleenajoa varten */
-    private Sampo s;
     
     //** Käyttöliittymä vanhan suorituksen piilottamiseksi */
     private Kayttoliittyma ui;
 
     /** Alustaa kuuntelijan muuttujat saaduilla parametreilla 
-    *@param sa Yläluokka
     *@param u Käyttöliittymä 
     */
-    public ValikkoKuuntelija(Sampo sa, Kayttoliittyma u) {
-        s = sa;
+    public ValikkoKuuntelija(Kayttoliittyma u) {
         ui = u;
     }
 
@@ -30,13 +25,33 @@ public class ValikkoKuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
+        
         if(action.equals("Exit")){
-            System.exit(0);
+            ui.exit();
         }
-        else if(action.equals("New grid")){
-            try{s.kaynnista();}
-            catch(Exception x){}
-            ui.getFrame().setVisible(false);
+        else if(action.equals("New grid..")){
+            ui.kaynnista();
+        }
+        else if(action.equals("About")){
+            ui.naytaAbout();
+        }
+        
+        else if(action.equals("Change dictionary..")){
+            try {
+                ui.vaihdaSanakirjaa();
+            } catch (Exception ex) {
+            }
+        }
+        
+        else if (action.equals("Help")){
+            try {ui.naytaHelp();} 
+            catch (Exception ex) {
+                ui.helpFailure();
+            }
+        }
+        
+        else if(action.equals("About")){
+            ui.naytaAbout();
         }
 
     }

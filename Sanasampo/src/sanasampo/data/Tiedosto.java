@@ -1,9 +1,12 @@
 package sanasampo.data;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -21,6 +24,9 @@ public class Tiedosto {
     /**Käsiteltävä tiedosto*/
     private File file;
 
+    /** Tiedoston ulkoiseen avaamiseen */
+    Desktop dt;
+    
     /**
      * Konstruktori alustaa {@link sanasampo.data.Tiedosto#file}-olion polulla,
      * jonka metodi saa parametrina. 
@@ -43,21 +49,35 @@ public class Tiedosto {
         br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "ISO-8859-1")); 
         ArrayList<String> temp = new ArrayList<String>();
         String sana;
-        
         while ((sana = br.readLine()) != null) {
             if (sana.length() >= 3) {
                 temp.add(sana);
             }
         }
-        
         if(temp.isEmpty()){throw new FileEmptyException("File is empty!");}
         
         br.close();
         return temp;
     }
     
+    /** Avaa tiedoston toisessa ohjelmassa */
+    public void avaa() throws IOException{
+        dt = Desktop.getDesktop();
+        dt.open(file); 
+    }
+    
     /** Palauttaa totuusarvon tiedoston olemassaolosta */
     public boolean exists(){
         return file.exists();
+    }
+    
+    public void kirjoita(String s) throws IOException{
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        writer.write(s);
+        writer.close();
+    }
+   
+    public String getNimi(){
+        return file.getName().replaceFirst("[.][^.]+$", "");
     }
 }

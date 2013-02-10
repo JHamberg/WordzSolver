@@ -7,16 +7,12 @@ package sanasampo.ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.SwingUtilities;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import sanasampo.Sampo;
 import sanasampo.data.Hakemisto;
 import sanasampo.data.Ruudukko;
 import sanasampo.data.Sanakirja;
+import sanasampo.lang.FileEmptyException;
 import sanasampo.logic.Haku;
 
 /**
@@ -26,7 +22,7 @@ import sanasampo.logic.Haku;
 public class KayttoliittymaTest {
     Kayttoliittyma ui;
     
-    public KayttoliittymaTest() throws FileNotFoundException, IOException {
+    public KayttoliittymaTest() throws FileNotFoundException, IOException, FileEmptyException {
        Hakemisto h = new Hakemisto(new Sanakirja());
        Ruudukko r = new Ruudukko();
        r.alusta("kissakoiratalomo");

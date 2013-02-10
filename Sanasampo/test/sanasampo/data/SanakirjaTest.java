@@ -9,6 +9,7 @@ import java.io.Writer;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Test;
+import sanasampo.lang.FileEmptyException;
 
 public class SanakirjaTest {
     static final String testDir = "test\\sanasampo\\files\\";
@@ -17,7 +18,7 @@ public class SanakirjaTest {
     File f;
     Writer output;
 
-    public SanakirjaTest() throws FileNotFoundException, IOException {
+    public SanakirjaTest() throws FileNotFoundException, IOException, FileEmptyException {
         s = new Sanakirja();
         f = new File(testDir + fileName); //ISSUE temp is not removed! 
         f.createNewFile();
@@ -27,6 +28,13 @@ public class SanakirjaTest {
     @After
     public void tearDown() {
         f.delete(); //Tuhotaan TEMP tiedosto testin jalkeen
+    }
+    
+    @Test
+    public void olematonSanakirjaPalauttaaErrorin() throws FileNotFoundException, IOException, FileEmptyException{
+        Sanakirja s1 = new Sanakirja();
+        s1.alusta("f8d4c5d3c5809257f483c97a36db8d57.txt");
+        assertEquals(false, !s1.getErrorState());
     }
     
     @Test
@@ -40,28 +48,27 @@ public class SanakirjaTest {
     }
 
     @Test
-    public void alustusIlmanParametriaToimii() throws FileNotFoundException, IOException{
+    public void alustusIlmanParametriaToimii() throws FileNotFoundException, IOException, FileEmptyException{
         assertEquals(true, !(new Sanakirja().getTiedostoPolku().isEmpty()));
     }
 
     @Test
-    public void olematonSanakirjaPalauttaaErrorin() throws FileNotFoundException, IOException{
-        assertEquals(false, !(new Sanakirja("f8d4c5d3c5809257f483c97a36db8d57.txt").getErrorState()));
-    }
-
-    @Test
-    public void yksiSanaisenKirjanKoko() throws IOException {
+    public void yksiSanaisenKirjanKoko() throws IOException, FileEmptyException {
         output.write("abc123");
         output.close();
-        assertEquals(1, new Sanakirja(testDir + fileName).getKoko());
+        Sanakirja s1 = new Sanakirja();
+        s1.alusta(testDir+fileName);
+        assertEquals(1, s1.getKoko());
     }
     
     
     @Test
-    public void kaksiSanaisenKirjanKoko() throws IOException {
+    public void kaksiSanaisenKirjanKoko() throws IOException, FileEmptyException {
         output.write("abc123");
         output.write(System.getProperty("line.separator") + "321cba");
         output.close();
-        assertEquals(2, new Sanakirja(testDir + fileName).getKoko());
+        Sanakirja s1 = new Sanakirja();
+        s1.alusta(testDir+fileName);
+        assertEquals(2, s1.getKoko());
     }
 }

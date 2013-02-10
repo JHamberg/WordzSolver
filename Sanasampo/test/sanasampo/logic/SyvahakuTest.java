@@ -2,22 +2,19 @@ package sanasampo.logic;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import sanasampo.data.Hakemisto;
 import sanasampo.data.Ruudukko;
 import sanasampo.data.Sanakirja;
+import sanasampo.lang.FileEmptyException;
 
 public class SyvahakuTest {
     Ruudukko r;
     Haku h;
     Hakemisto kirjasto;
     
-    public SyvahakuTest() throws FileNotFoundException, IOException {
+    public SyvahakuTest() throws FileNotFoundException, IOException, FileEmptyException {
         kirjasto = new Hakemisto(new Sanakirja());
         r = new Ruudukko();
         r.alusta("kissakoiratalomo");

@@ -2,12 +2,14 @@ package sanasampo;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import sanasampo.data.Hakemisto;
 import sanasampo.data.Ruudukko;
 import sanasampo.data.Sanakirja;
+import sanasampo.lang.FileEmptyException;
 import sanasampo.logic.Haku;
 import sanasampo.ui.Kayttoliittyma;
 
@@ -35,31 +37,33 @@ public class Sampo {
      * käyttöliittymän. Jos parametri löytyy koitetaan alustaa sillä. 
      * @see sanasampo.data.Ruudukko#validate(String)
      */
-     public void kaynnista(String k){
+     public void kaynnista(String k) throws UnsupportedEncodingException, FileNotFoundException{
         if(k.isEmpty()) kysyKirjaimet();
         else input = k;
-        
         while (!r.alusta(input)) {
             JOptionPane.showMessageDialog(null, 
                     "Grid size should be equilateral (3x3, 4x4..) and contain no special characters!", 
                     "Grid Initialization Error!", JOptionPane.INFORMATION_MESSAGE);
             kysyKirjaimet();
         }
-        hae();
-        nayta();
+       hae();
+       nayta();
     }
 
-    /**Parametriton konstruktori välittää kuormitetulle konstruktorille 
-     * tyhjän merkkijonon
-     */
+    /**Parametriton käynnistys välittää kuormitetulle konstruktorille
+     tyhjän syötteen*/
     public void kaynnista() throws FileNotFoundException, IOException {
        kaynnista("");
     }
     
+    //** Parametrinen asennus asentaa Sammon oletussanakirjalla */
+    public void asenna() throws FileNotFoundException, IOException, FileEmptyException{
+        asenna(new Sanakirja());
+    }
    
     /** Alustaa hakemiston ja ruudukon */
-    public void asenna() throws FileNotFoundException, IOException {
-        h = new Hakemisto(new Sanakirja());
+    public void asenna(Sanakirja s) throws FileNotFoundException, IOException {
+        h = new Hakemisto(s);
         r = new Ruudukko();
     }
 
@@ -76,16 +80,20 @@ public class Sampo {
     }
 
     /** Kutsuu esiin käyttöliittymän (GUI), joka näyttää päättyneen haun tulokset.*/
-    private void nayta() {
+    private void nayta() throws UnsupportedEncodingException, FileNotFoundException {
         ui = new Kayttoliittyma(r, haku.getTulos(), haku.getHitlist(), this);
         SwingUtilities.invokeLater(ui);
     }
     
-    public ArrayList<String> haeTulos(){
+    public ArrayList<String> getTulos(){
         return haku.getTulos();
     }
     
-    public Kayttoliittyma haeUi(){
+    public Kayttoliittyma getUi(){
         return ui;
+    }
+    
+    public void exit(){
+        System.exit(0);
     }
 }
