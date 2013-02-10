@@ -1,0 +1,15 @@
+Haku hyödyntää sanojen etsimisessä Hakemistoa, jonka läpi iteroidaan 
+käyden edelleen läpi jokainen Sanakirja. Sanakirja sisältää kokoelman 
+sanoja, jotka on haettu käyttäen ennalta määriteltyä tai käyttäjän 
+valitsemaa tekstitiedostoa (*.txt). Yksi haku voi hyödyntää vain yhtä 
+hakemistoa. Hakemisto voi kuitenkin sisältää rajattoman määrän 
+Sanakirjoja. 
+
+Haku tuntee myös Ruudukon, jonka sisältämään kaksiulotteiseen listaan 
+haku tehdään. Ruudukko ei muutu haun seurauksena vaan tulokset 
+välitetään Käyttöliittymälle, jonka tehtävänä on näyttää tulokset 
+listana ja korostuksina visualisoidussa ruudukossa. Käyttöliittymä 
+siis tuntee piirtämänsä Ruudukon ja Haun tulokset. 
+
+Main tuntee Ruudukon ja Haun, joille se luovuttaa käyttäjän antaman 
+syötteen. Pääluokan tehtäväksi jää myös Hakemiston alustaminen.
