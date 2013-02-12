@@ -39,7 +39,7 @@ public final class Kayttoliittyma implements Runnable {
     /** Ruudukko joka sisällytetään RuudukkoPaneeliin*/
     private Ruudukko r;
     /** Yläluokka ohjelman uudelleenajoa varten */
-    private Sampo s;
+    private Sampo sampo;
     /** Tiedosto käyttöohjeiden näyttämiseen */
     private Tiedosto help; 
     /** Ohjelman avaaja käyttöohjeita varten */
@@ -80,10 +80,10 @@ public final class Kayttoliittyma implements Runnable {
         sanat = m;
         osumat = h;
         this.r = r;
-        s = sa;
+        sampo = sa;
         koko = r.getKoko();
         helper = new Helper();
-        try{ valittu = new Tiedosto("dictionary");
+        try{ valittu = new Tiedosto("dic\\dictionary");
         edellinen = valittu.lueListaan().get(0);
         } catch(Exception e){
             naytaUiError();
@@ -112,7 +112,7 @@ public final class Kayttoliittyma implements Runnable {
      * @param container AWT-komponentit sisältävä säiliö
      */
     private void luoKomponentit(Container container) throws IOException, FileEmptyException {
-        frame.setJMenuBar(new MenuValikko(s, this)); //Menupalkki
+        frame.setJMenuBar(new MenuValikko(sampo, this)); //Menupalkki
         
         helper.reverseOrder(sanat);
         list = new JList(sanat.toArray());
@@ -143,8 +143,8 @@ public final class Kayttoliittyma implements Runnable {
     
     /** Uudelleenkäynnistää haun esim. eri sanakirjalla */
     public void uudelleenKaynnista() throws FileNotFoundException, IOException, FileEmptyException{
-        try{s.asenna();
-        s.kaynnista(r.getKirjaimet());
+        try{sampo.asenna();
+        sampo.kaynnista(r.getKirjaimet());
         this.getFrame().setVisible(false);
         this.getFrame().dispose(); 
        }
@@ -158,8 +158,8 @@ public final class Kayttoliittyma implements Runnable {
     
     /** Aloittaa uuden kierroksen */
      public void kaynnista(){
-        try{s.asenna();
-            s.kaynnista();
+        try{sampo.asenna();
+            sampo.kaynnista();
             this.getFrame().setVisible(false);}
             catch(Exception x){
                 JOptionPane.showMessageDialog(frame, "Error: Dictionary not found!"
@@ -170,7 +170,7 @@ public final class Kayttoliittyma implements Runnable {
     
     /** Antaa pääluokalle kehotteen sulkea ohjelma */
     public void exit(){
-        s.exit();
+        sampo.exit();
     }
     
     /** Avaa käyttöohjeet.pdf-tiedoston käyttäjän oletusohjelmassa*/
@@ -190,7 +190,7 @@ public final class Kayttoliittyma implements Runnable {
         fc.setMultiSelectionEnabled(false);
         
         //Avataava hakemisto
-        fc.setCurrentDirectory(new File("."));
+        fc.setCurrentDirectory(new File(".\\dic"));
         if (fc.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION){ 
             valittu.kirjoita(fc.getSelectedFile().getName());
             uudelleenKaynnista();

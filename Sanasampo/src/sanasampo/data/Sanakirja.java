@@ -33,8 +33,8 @@ public final class Sanakirja {
      * @see sanasampo.data.Sanakirja#DEFAULT_DICTIONARY
      */
     public Sanakirja() throws FileNotFoundException, IOException, FileEmptyException {
-        DEFAULT_DICTIONARY = new Tiedosto("dictionary").lueListaan().get(0);
-        alusta(DEFAULT_DICTIONARY);
+        DEFAULT_DICTIONARY = new Tiedosto("dic\\dictionary").lueListaan().get(0);
+        alusta("dic\\"+DEFAULT_DICTIONARY);
         }
     /**
      * Konstruktori alustaa sanalistan lukemalla sanoja tekstitiedostosta, 
