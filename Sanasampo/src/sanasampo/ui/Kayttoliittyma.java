@@ -17,6 +17,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import sanasampo.Sampo;
 import sanasampo.data.Ruudukko;
 import sanasampo.data.Tiedosto;
@@ -181,8 +182,14 @@ public final class Kayttoliittyma implements Runnable {
     /** Avaa tiedostonäkymän ja antaa käyttäjälle mahdollisuuden vaihtaa sanakirjaa
      * kirjoittaa käytetyn sanakirjan nimen dictionary-tiedostoon */
     public void vaihdaSanakirjaa() throws FileNotFoundException, UnsupportedEncodingException, IOException, FileEmptyException{
-        fc = new JFileChooser("app");
+        fc = new JFileChooser();
+        
+        //Filtterit
+        fc.setAcceptAllFileFilterUsed(false);
         fc.addChoosableFileFilter(new DictionaryFilter());
+        fc.setMultiSelectionEnabled(false);
+        
+        //Avataava hakemisto
         fc.setCurrentDirectory(new File("."));
         if (fc.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION){ 
             valittu.kirjoita(fc.getSelectedFile().getName());
