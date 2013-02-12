@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import sanasampo.lang.FileEmptyException;
 
 
@@ -34,7 +35,7 @@ public class Tiedosto {
      * @param polku Tiedostopolku
      */
     public Tiedosto(String polku) throws FileNotFoundException, UnsupportedEncodingException {
-        file = new File(polku);
+         file = new File(polku);
     }
 
     /**
@@ -80,4 +81,5 @@ public class Tiedosto {
     public String getNimi(){
         return file.getName().replaceFirst("[.][^.]+$", "");
     }
+
 }

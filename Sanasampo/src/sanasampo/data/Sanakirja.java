@@ -3,6 +3,7 @@ package sanasampo.data;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import sanasampo.lang.FileEmptyException;
 
  /**
@@ -34,8 +35,7 @@ public final class Sanakirja {
     public Sanakirja() throws FileNotFoundException, IOException, FileEmptyException {
         DEFAULT_DICTIONARY = new Tiedosto("dictionary").lueListaan().get(0);
         alusta(DEFAULT_DICTIONARY);
-    }
-
+        }
     /**
      * Konstruktori alustaa sanalistan lukemalla sanoja tekstitiedostosta, 
      * käyttäen luokkaa {@link sanasampo.data.Tiedosto} tiedostonhallintaan.

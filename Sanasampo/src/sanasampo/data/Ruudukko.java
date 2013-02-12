@@ -25,7 +25,7 @@ public class Ruudukko {
     
     /** Apuluokka ruudukon muodon tarkistamiseksi*/
     private Helper h;
-
+    
     /** Konstruktori alustaa patternin, joka sisältää ehdon ruudukon
      * hyväksytyistä merkeistä (a-ö), sekä apuluokan
      * {@link sanasampo.logic.Helper} 
@@ -59,7 +59,6 @@ public class Ruudukko {
             ruudukko = new String[reuna][reuna]; //Luodaan AxA kokoinen ruudukko
             alustaRuudukko();
             return true;
-
         } else {
             return false;
         }
@@ -87,8 +86,9 @@ public class Ruudukko {
      * @see sanasampo.logic.Helper#onKahdenPotenssi(long)
      */
     private boolean validoi(String k) {
-        if (k == null) { //Painettu cancel? 
+        if (k == null) {
             System.exit(0);
+            return false;
         }
         if (!h.onKahdenPotenssi(k.length()) //Tasasivuinen ruudukko?
                 || k.length() > 100 //Liian iso?
@@ -153,7 +153,7 @@ public class Ruudukko {
     public Ruudukko kloonaa() {
         return this;
     }
-
+    
     public String getKirjaimet() {
         return kirjaimet;
     }

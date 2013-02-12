@@ -29,7 +29,7 @@ import sanasampo.logic.Helper;
  * interaktiivisena listana. Tarjoaa menu-valikon, josta suora pääsy perustoiminnallisuuksiin.
  */
 
-public class Kayttoliittyma implements Runnable {
+public final class Kayttoliittyma implements Runnable {
    
     
     /** Apuluokka sanalistan järjestyksen kääntämiseen
@@ -65,6 +65,9 @@ public class Kayttoliittyma implements Runnable {
     private int koko;
     /** Valittu sanakirja */
     Tiedosto valittu;
+    /** Edellinen sanakirjan tiedostonimi */
+    String edellinen;
+    
     
     /** Konstruktori joka saa parametrinaan ruudukon, listan haun tuloksista polkuineen), sekä yläluokan.
      * @param r Kirjaimet sisältävä ruudukko
@@ -72,15 +75,18 @@ public class Kayttoliittyma implements Runnable {
      * @param h Polut sisältävä tietorakenne, jota käytetään kirjainten korostamisessa
      * @param sa Yläluokka ohjelman uudelleenajoa varten
      */
-    public Kayttoliittyma(Ruudukko r, ArrayList<String> m, TreeMap<String, ArrayList<String>> h, Sampo sa) 
-            throws FileNotFoundException, UnsupportedEncodingException {
+    public Kayttoliittyma(Ruudukko r, ArrayList<String> m, TreeMap<String, ArrayList<String>> h, Sampo sa){
         sanat = m;
         osumat = h;
         this.r = r;
         s = sa;
         koko = r.getKoko();
         helper = new Helper();
-        valittu = new Tiedosto("dictionary");
+        try{ valittu = new Tiedosto("dictionary");
+        edellinen = valittu.lueListaan().get(0);
+        } catch(Exception e){
+            naytaUiError();
+        }
     }
 
     
@@ -135,19 +141,30 @@ public class Kayttoliittyma implements Runnable {
     }
     
     /** Uudelleenkäynnistää haun esim. eri sanakirjalla */
-    public void uudelleenKaynnista(){
+    public void uudelleenKaynnista() throws FileNotFoundException, IOException, FileEmptyException{
         try{s.asenna();
         s.kaynnista(r.getKirjaimet());
-        }
-            catch(Exception x){}
-            this.getFrame().setVisible(false);
+        this.getFrame().setVisible(false);
+        this.getFrame().dispose(); 
+       }
+            catch(Exception x){
+                JOptionPane.showMessageDialog(frame, "Error: Selected dictionary is invalid!"
+                        + "\nPlease try again.");
+                vaihdaSanakirjaa();
+                valittu.kirjoita(edellinen);
+            }
     }
     
     /** Aloittaa uuden kierroksen */
      public void kaynnista(){
-        try{s.kaynnista();}
-            catch(Exception x){}
-            this.getFrame().setVisible(false);
+        try{s.asenna();
+            s.kaynnista();
+            this.getFrame().setVisible(false);}
+            catch(Exception x){
+                JOptionPane.showMessageDialog(frame, "Error: Dictionary not found!"
+                        + "\nPlease use another dictionary.");
+            }
+            
     }
     
     /** Antaa pääluokalle kehotteen sulkea ohjelma */
@@ -163,7 +180,7 @@ public class Kayttoliittyma implements Runnable {
     
     /** Avaa tiedostonäkymän ja antaa käyttäjälle mahdollisuuden vaihtaa sanakirjaa
      * kirjoittaa käytetyn sanakirjan nimen dictionary-tiedostoon */
-    public void vaihdaSanakirjaa() throws FileNotFoundException, FileNotFoundException, UnsupportedEncodingException, IOException{
+    public void vaihdaSanakirjaa() throws FileNotFoundException, UnsupportedEncodingException, IOException, FileEmptyException{
         fc = new JFileChooser("app");
         fc.addChoosableFileFilter(new DictionaryFilter());
         fc.setCurrentDirectory(new File("."));
@@ -176,15 +193,20 @@ public class Kayttoliittyma implements Runnable {
     /** Näyttää virheilmoituksen jos PDF-tiedostoa ei pystytä avaamaan */
     public void helpFailure(){
         JOptionPane.showMessageDialog(frame, "<html><h3>Error!</h3>"
-                + "Tiedostoa ei pystytty avaamaan. Käyttöohjeet <br>"
-                + "löytyvät ohjelman asennushakemistosta.<br><br>"
-                + "Tiedoston avaamisen tarvitset ohjelman,<br> jolla voi lukea "
-                + "PDF-muodossa olevia tiedostoja.</html>");
+                + "File could not be opened. Instructions <br>"
+                + "can be found from the installation location of this program.<br><br>"
+                + "To open the file, you need a program,<br> that can read "
+                + "files in PDF-format.</html>");
     }
     
     /** Palauttaa Sanakirjana käytetyn tiedoston nimen ilman tiedostopäätettä */
     public String getKieli() throws IOException, FileEmptyException {
         return valittu.lueListaan().get(0).replaceFirst("[.][^.]+$", "");
+    }
+    
+    public void naytaUiError(){
+         JOptionPane.showMessageDialog(frame, "Failed to create UI!\n"
+                 + "Program will terminate.");
     }
     
     public JList getList(){

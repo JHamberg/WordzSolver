@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import sanasampo.data.Hakemisto;
@@ -24,7 +26,7 @@ public class Sampo {
     private Hakemisto hakemisto;
     
     /** Käyttäjän määrittelemät kirjaimet sisältävä ruudukko */
-    private Ruudukko r;
+    private Ruudukko ruudukko;
     
     /** Käyttäjän syöte, jolla ruudukko alustetaan */
     private String syote;
@@ -37,10 +39,10 @@ public class Sampo {
      * käyttöliittymän. Jos parametri löytyy koitetaan alustaa sillä. 
      * @see sanasampo.data.Ruudukko#validoi(String)
      */
-     public void kaynnista(String k) throws UnsupportedEncodingException, FileNotFoundException{
+     public void kaynnista(String k) {
         if(k.isEmpty()) kysyKirjaimet();
         else syote = k;
-        while (!r.alusta(syote)) {
+        while (!ruudukko.alusta(syote)) {
             JOptionPane.showMessageDialog(null, 
                     "Grid size should be equilateral (3x3, 4x4..) and contain no special characters!\n"
                     + "At the moment only dimensions up to 10x10 are accepted. ", 
@@ -53,7 +55,7 @@ public class Sampo {
 
     /**Parametriton käynnistys välittää kuormitetulle konstruktorille
      tyhjän syötteen*/
-    public void kaynnista() throws FileNotFoundException, IOException {
+    public void kaynnista() throws FileNotFoundException, IOException, UnsupportedEncodingException, FileEmptyException {
        kaynnista("");
     }
     
@@ -65,7 +67,7 @@ public class Sampo {
     /** Alustaa hakemiston ja ruudukon */
     public void asenna(Sanakirja s) throws FileNotFoundException, IOException {
         hakemisto = new Hakemisto(s);
-        r = new Ruudukko();
+        ruudukko = new Ruudukko();
     }
 
     /** Näyttää käyttäjälle syötekentän ja kysyy syötettä */
@@ -77,13 +79,13 @@ public class Sampo {
     /** Välittää hakualgoritmin toteuttavalle luokalle ruudukon ja käytetyn hakemiston
      * ja käynnistää haun */
     private void hae() {
-        haku = new Haku(hakemisto, r);
+        haku = new Haku(hakemisto, ruudukko);
         haku.kaynnista();
     }
 
     /** Kutsuu esiin käyttöliittymän (GUI), joka näyttää päättyneen haun tulokset.*/
-    private void nayta() throws UnsupportedEncodingException, FileNotFoundException {
-        ui = new Kayttoliittyma(r, haku.getTulos(), haku.getHitlist(), this);
+    private void nayta() {
+        ui = new Kayttoliittyma(ruudukko, haku.getTulos(), haku.getHitlist(), this);
         SwingUtilities.invokeLater(ui);
     }
     

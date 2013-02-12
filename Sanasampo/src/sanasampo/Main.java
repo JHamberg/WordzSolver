@@ -14,7 +14,7 @@ public class Main {
     /** Luo ja alustaa Sampon, käynnistää ohjelman */
     public static void main(String[] args) throws FileNotFoundException, IOException, FileEmptyException {
         Sampo s = new Sampo();
-        s.asenna();
+        s.asenna(); 
         s.kaynnista();
     }
 }

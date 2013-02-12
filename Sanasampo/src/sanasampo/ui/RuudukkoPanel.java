@@ -4,11 +4,13 @@
  */
 package sanasampo.ui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import sanasampo.data.Ruudukko;
