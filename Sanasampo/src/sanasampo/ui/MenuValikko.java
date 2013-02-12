@@ -50,7 +50,7 @@ public final class MenuValikko extends JMenuBar{
      /** Lisää sanojen määrän valikkopalkin oikeaan laitaan */
      public void lisaaMaara() throws IOException, FileEmptyException{
          this.add(Box.createHorizontalGlue());
-         this.add(new JLabel("Language: "+ h.capitalize(gui.getKieli())+"    |    "));
+         this.add(new JLabel("Selection: "+ h.capitalize(gui.getKieli())+"    |    "));
          this.add(new JLabel("Words: "+gui.getListanKoko()+ "   "));
      }
      

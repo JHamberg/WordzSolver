@@ -91,6 +91,7 @@ public class Ruudukko {
             return false;
         }
         if (!h.onKahdenPotenssi(k.length()) //Tasasivuinen ruudukko?
+                || k.length() < 3 //Liian pieni
                 || k.length() > 100 //Liian iso?
                 || k.isEmpty() //Tyhjä syöte?
                 || k.contains(" ") //Välilyöntejä?
