@@ -21,13 +21,13 @@ public class Sampo {
     private Kayttoliittyma ui;
     
     /** Sanakirjat sisältävä hakemisto */
-    private Hakemisto h;
+    private Hakemisto hakemisto;
     
     /** Käyttäjän määrittelemät kirjaimet sisältävä ruudukko */
     private Ruudukko r;
     
     /** Käyttäjän syöte, jolla ruudukko alustetaan */
-    private String input;
+    private String syote;
     
     /** Hakualgoritmin toteuttava luokka */
     private Haku haku;
@@ -35,14 +35,15 @@ public class Sampo {
     /** Kysyy käyttäjältä kirjaimet, pyrkii alustamaan niillä ruudukon ja näyttää
      * virhedialogin validoinnin epäonnistuessa. Aloittaa haun ja kutsuu esiin 
      * käyttöliittymän. Jos parametri löytyy koitetaan alustaa sillä. 
-     * @see sanasampo.data.Ruudukko#validate(String)
+     * @see sanasampo.data.Ruudukko#validoi(String)
      */
      public void kaynnista(String k) throws UnsupportedEncodingException, FileNotFoundException{
         if(k.isEmpty()) kysyKirjaimet();
-        else input = k;
-        while (!r.alusta(input)) {
+        else syote = k;
+        while (!r.alusta(syote)) {
             JOptionPane.showMessageDialog(null, 
-                    "Grid size should be equilateral (3x3, 4x4..) and contain no special characters!", 
+                    "Grid size should be equilateral (3x3, 4x4..) and contain no special characters!\n"
+                    + "At the moment only dimensions up to 10x10 are accepted. ", 
                     "Grid Initialization Error!", JOptionPane.INFORMATION_MESSAGE);
             kysyKirjaimet();
         }
@@ -63,19 +64,20 @@ public class Sampo {
    
     /** Alustaa hakemiston ja ruudukon */
     public void asenna(Sanakirja s) throws FileNotFoundException, IOException {
-        h = new Hakemisto(s);
+        hakemisto = new Hakemisto(s);
         r = new Ruudukko();
     }
 
     /** Näyttää käyttäjälle syötekentän ja kysyy syötettä */
     private void kysyKirjaimet() {
-        input = JOptionPane.showInputDialog(null, "Anna kirjaimet: ", "Ruudukon valinta", 1);
+        syote = JOptionPane.showInputDialog(null, "Grid contents in one line: ", 
+                "Grid selection", 1);
     }
 
     /** Välittää hakualgoritmin toteuttavalle luokalle ruudukon ja käytetyn hakemiston
      * ja käynnistää haun */
     private void hae() {
-        haku = new Haku(h, r);
+        haku = new Haku(hakemisto, r);
         haku.kaynnista();
     }
 

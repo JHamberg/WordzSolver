@@ -14,7 +14,7 @@ public class Helper {
      * Tarkistaa onko luvun neliöjuuri kokonaisluku. Jos ehto pätee, on
      * parametrina saadun luvun kokoinen ruudukko tasasivuinen
      *
-     * @see sanasampo.data.Ruudukko#validate(String)
+     * @see sanasampo.data.Ruudukko#validoi(String)
      */
     public boolean onKahdenPotenssi(long n) {
         if (n < 0) {

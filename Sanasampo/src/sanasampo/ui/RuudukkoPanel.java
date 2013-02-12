@@ -17,7 +17,7 @@ import sanasampo.logic.Helper;
 /** Esittää käyttäjän antaman syötteen siinä muodossa, jossa
  * ohjelma (ja todennäköisesti myös käyttäjä sen hahmottaa.
  * Mahdollistaa sanapolkujen korostamisen ja ruudukon päivittämisen
- * @see sanasampo.Sampo#input
+ * @see sanasampo.Sampo#syote
  */
 public class RuudukkoPanel extends JPanel {
 

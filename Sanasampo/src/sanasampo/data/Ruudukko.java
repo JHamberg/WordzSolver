@@ -49,11 +49,11 @@ public class Ruudukko {
      * @param k Käyttäjän antamat ruudukon kirjaimet
      * @return True jos alustus onnistui, false jos ei
      * @see sanasampo.data.Ruudukko#alustaRuudukko()
-     * @see sanasampo.data.Ruudukko#validate(String)
+     * @see sanasampo.data.Ruudukko#validoi(String)
      */
     public boolean alusta(String k) {
 
-        if (validate(k)) {
+        if (validoi(k)) {
             kirjaimet = k;
             reuna = (int) Math.sqrt(k.length());
             ruudukko = new String[reuna][reuna]; //Luodaan AxA kokoinen ruudukko
@@ -86,14 +86,15 @@ public class Ruudukko {
      * @return True jos validointi menee läpi, false jos ei
      * @see sanasampo.logic.Helper#onKahdenPotenssi(long)
      */
-    private boolean validate(String k) {
+    private boolean validoi(String k) {
         if (k == null) { //Painettu cancel? 
             System.exit(0);
         }
         if (!h.onKahdenPotenssi(k.length()) //Tasasivuinen ruudukko?
+                || k.length() > 100 //Liian iso?
                 || k.isEmpty() //Tyhjä syöte?
                 || k.contains(" ") //Välilyöntejä?
-                || !p.matcher(k).find()) { //Erikoismerkkejä
+                || !p.matcher(k).find()) { //Erikoismerkkejä?
             return false;
         } else {
             return true;
