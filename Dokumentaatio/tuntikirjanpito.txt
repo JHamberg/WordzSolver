@@ -39,5 +39,6 @@ Suunnittelua, pieniä muutoksia.
 Sunnuntai 10.2.2013, 10h (Beta Release 2) 
 Toteutettu käyttöliittymä loppuun, lisätty mahdollisuus vaihtaa sanakirjaa, päivitetty testit. Useita muutoksia.
 
-Tiistai 12.2, 5h 
-Korjattu virheitä, muutettu metodinimiä, uusi sekvenssikaavio, tehty testausdokumentaatio.
+Tiistai 12.2, 10h (Release Candidate 1)
+Korjattu virheitä, muutettu metodinimiä, uusi sekvenssikaavio, kirjoitettu testausdokumentaatio ja käyttöohjeet, 
+uusia testejä, parannettu virheenhallintaa
