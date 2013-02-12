@@ -51,12 +51,9 @@ public class Tiedosto {
         ArrayList<String> temp = new ArrayList<String>();
         String sana;
         while ((sana = br.readLine()) != null) {
-            if (sana.length() >= 3) {
-                temp.add(sana);
-            }
+            if (sana.length() >= 3) temp.add(sana);
         }
         if(temp.isEmpty()){throw new FileEmptyException("File is empty!");}
-        
         br.close();
         return temp;
     }
