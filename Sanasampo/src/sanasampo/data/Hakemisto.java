@@ -3,7 +3,9 @@ package sanasampo.data;
 
 import java.util.ArrayList;
 
-/** Sisältää listan sanakirjoja ja niiden hallintaan tarvittavat metodit. */
+/** Sisältää listan sanakirjoja ja niiden hallintaan tarvittavat metodit. 
+  * Tällä hetkellä ohjelma tukee vain yhtä sanakirjaa kerrallaan, mutta 
+  * laajennukselle on jätetty varaa */
 
 public class Hakemisto {
     
@@ -30,7 +32,7 @@ public class Hakemisto {
      * Tarkistetaan myös ettei lisättävä olio löydy jo hakemistosta.
      @see sanasampo.data.Sanakirja#getTiedostoPolku()
      @param sanakirja Lisättävä sanakirja*/
-    public boolean addSanakirja(Sanakirja sanakirja){
+    public boolean lisaaSanakirja(Sanakirja sanakirja){
         for(Sanakirja s : hakemisto){
             if (s.getTiedostoPolku().equals(sanakirja.getTiedostoPolku())){ //Polku on uniikki jokaiselle
                 return false;

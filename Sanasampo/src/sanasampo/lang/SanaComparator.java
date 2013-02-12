@@ -12,7 +12,6 @@ public class SanaComparator implements Comparator<String> {
      * @param o2 Toinen vertailtava
      * @see sanasampo.logic.Helper
      */
-    
     @Override
     public int compare(String o1, String o2) {
         if (o1.length() > o2.length()) {

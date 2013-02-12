@@ -1,6 +1,5 @@
 package sanasampo.data;
 
-// @author JHamberg
 import java.util.regex.Pattern;
 import sanasampo.logic.Helper;
 
@@ -8,21 +7,15 @@ import sanasampo.logic.Helper;
  * voidaan hakea ja poistaa kirjaimia.<br> Ruudukon alustukseen liittyy
  * olennaisesti syötteen validointi.
  */
-
 public class Ruudukko {
-
     /** Pattern ruudukon validointia varten*/
     private Pattern p;
-    
     /** Ruudukon reunan pituus */
     private int reuna;
-    
     /** Kaksiulotteinen array, johon kirjaimet luetaan*/
     private String ruudukko[][];
-    
     /** Ruudukon sisältämät kirjaimet*/
     private String kirjaimet;
-    
     /** Apuluokka ruudukon muodon tarkistamiseksi*/
     private Helper h;
     
@@ -46,18 +39,18 @@ public class Ruudukko {
     /**
      * Validoi parametrina saadut kirjaimet ja alustaa ruudukon niillä
      *
-     * @param k Käyttäjän antamat ruudukon kirjaimet
+     * @param syote Käyttäjän antamat ruudukon kirjaimet
      * @return True jos alustus onnistui, false jos ei
-     * @see sanasampo.data.Ruudukko#alustaRuudukko()
+     * @see sanasampo.data.Ruudukko#lueRuudukkoon()
      * @see sanasampo.data.Ruudukko#validoi(String)
      */
-    public boolean alusta(String k) {
+    public boolean alusta(String syote) {
 
-        if (validoi(k)) {
-            kirjaimet = k;
-            reuna = (int) Math.sqrt(k.length());
+        if (validoi(syote)) {
+            kirjaimet = syote;
+            reuna = (int) Math.sqrt(syote.length());
             ruudukko = new String[reuna][reuna]; //Luodaan AxA kokoinen ruudukko
-            alustaRuudukko();
+            lueRuudukkoon();
             return true;
         } else {
             return false;
@@ -67,7 +60,7 @@ public class Ruudukko {
     /**
      * Lukee käyttäjän antamat kirjaimet {@link #ruudukko}-muuttujaan
      */
-    private void alustaRuudukko() {
+    private void lueRuudukkoon() {
         int pituus = 0;
         for (int i = 0; i < reuna; i++) {
             for (int j = 0; j < reuna; j++) {
@@ -81,21 +74,21 @@ public class Ruudukko {
      * Tarkistaa, että parametrina saatu käyttäjän syöte ei ole tyhjä, sisällä
      * kiellettyjä merkkejä tai ole väärän kokoinen.
      *
-     * @param k Käyttäjän antamat kirjaimet
+     * @param syote Käyttäjän antamat kirjaimet
      * @return True jos validointi menee läpi, false jos ei
      * @see sanasampo.logic.Helper#onKahdenPotenssi(long)
      */
-    private boolean validoi(String k) {
-        if (k == null) {
+    private boolean validoi(String syote) {
+        if (syote == null) {
             System.exit(0);
             return false;
         }
-        if (!h.onKahdenPotenssi(k.length()) //Tasasivuinen ruudukko?
-                || k.length() < 3 //Liian pieni
-                || k.length() > 100 //Liian iso?
-                || k.isEmpty() //Tyhjä syöte?
-                || k.contains(" ") //Välilyöntejä?
-                || !p.matcher(k).find()) { //Erikoismerkkejä?
+        if (!h.onKahdenPotenssi(syote.length()) //Tasasivuinen ruudukko?
+                || syote.length() < 3 //Liian pieni
+                || syote.length() > 100 //Liian iso?
+                || syote.isEmpty() //Tyhjä syöte?
+                || syote.contains(" ") //Välilyöntejä?
+                || !p.matcher(syote).find()) { //Erikoismerkkejä?
             return false;
         } else {
             return true;
@@ -129,12 +122,12 @@ public class Ruudukko {
      * @param ch Etsittävä kirjain
      * @return Kaksialkioinen lista, joka sisältää solun koordinaatit
      */
-    public int[] charSijainti(char ch) {
+    public int[] kirjaimenSijainti(char ch) {
         int[] sijainnit = new int[2];
-        String c = Character.toString(ch); //Käytössä String 
+        String kirjain = Character.toString(ch); //Käytössä String 
         for (int i = 0; i < reuna; i++) {
             for (int j = 0; j < reuna; j++) {
-                if (ruudukko[i][j].equals(c)) {
+                if (ruudukko[i][j].equals(kirjain)) {
                     sijainnit[0] = i;
                     sijainnit[1] = j;
                     return sijainnit;
@@ -144,15 +137,6 @@ public class Ruudukko {
         sijainnit[0] = -1;
         sijainnit[1] = -1;
         return sijainnit;
-    }
-
-    /**
-     * Palauttaa kopion oliosta
-     * 
-     * @return Ruudukko-olio
-     */
-    public Ruudukko kloonaa() {
-        return this;
     }
     
     public String getKirjaimet() {

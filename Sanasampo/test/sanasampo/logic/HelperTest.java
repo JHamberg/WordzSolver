@@ -44,7 +44,7 @@ public class HelperTest {
     public void reverseOrderToimii() {
         ArrayList<String> a = new ArrayList<String>(Arrays.asList("iso", "isompi", "isoin"));
         String apu ="";
-        a = h.reverseOrder(a);
+        a = h.kaannaJarjestys(a);
         for(String s: a){
             apu += s;
         }
@@ -55,7 +55,7 @@ public class HelperTest {
     public void reverseOrderToimiiYhdenKokoiselle() {
         ArrayList<String> a = new ArrayList<String>(Arrays.asList("foreveralone"));
         String apu ="";
-        a = h.reverseOrder(a);
+        a = h.kaannaJarjestys(a);
         for(String s: a){
             apu += s;
         }

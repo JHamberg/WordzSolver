@@ -24,18 +24,18 @@ public class Esitarkastus {
      * @return True jos sana voidaan muodostaa ruudukon kirjaimista.
      * False jos ruudukossa ei ole jotain sanan kirjaimista, tai niitä
      * on liian vähän.
-     * @see sanasampo.data.Ruudukko#charSijainti(char)
+     * @see sanasampo.data.Ruudukko#kirjaimenSijainti(char)
      */
     public boolean suorita(String s){
         
         Ruudukko temp = alusta();
         
         for (int i = 0; i < s.length(); i++) {
-            int x = temp.charSijainti(s.charAt(i))[0];
-            int y = temp.charSijainti(s.charAt(i))[1];
-            if (x == -1 && y == -1) { //Jos sanassa olevaa kirjainta ei ole
-                return false;         //hylätään sana
-            }
+            int x = temp.kirjaimenSijainti(s.charAt(i))[0];
+            int y = temp.kirjaimenSijainti(s.charAt(i))[1];
+            //Jos kirjainta ei löydy, hylätään sana
+            if (x == -1 && y == -1)  return false;  
+           
             temp.poistaRuutu(x, y); //Sama kirjain ei saa löytyä uudestaan
         }
         return true;

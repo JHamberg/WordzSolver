@@ -1,17 +1,11 @@
 package sanasampo;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import sanasampo.data.Hakemisto;
 import sanasampo.data.Ruudukko;
 import sanasampo.data.Sanakirja;
-import sanasampo.lang.FileEmptyException;
 import sanasampo.logic.Haku;
 import sanasampo.ui.Kayttoliittyma;
 
@@ -55,17 +49,17 @@ public class Sampo {
 
     /**Parametriton käynnistys välittää kuormitetulle konstruktorille
      tyhjän syötteen*/
-    public void kaynnista() throws FileNotFoundException, IOException, UnsupportedEncodingException, FileEmptyException {
+    public void kaynnista()  {
        kaynnista("");
     }
     
     //** Parametrinen asennus asentaa Sammon oletussanakirjalla */
-    public void asenna() throws FileNotFoundException, IOException, FileEmptyException{
+    public void asenna() {
         asenna(new Sanakirja());
     }
    
     /** Alustaa hakemiston ja ruudukon */
-    public void asenna(Sanakirja s) throws FileNotFoundException, IOException {
+    public void asenna(Sanakirja s) {
         hakemisto = new Hakemisto(s);
         ruudukko = new Ruudukko();
     }

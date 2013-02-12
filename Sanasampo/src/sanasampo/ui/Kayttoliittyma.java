@@ -5,24 +5,21 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Desktop;
 import java.awt.Dimension;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.TreeMap;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import sanasampo.Sampo;
 import sanasampo.data.Ruudukko;
 import sanasampo.data.Tiedosto;
-import sanasampo.lang.DictionaryFilter;
 import sanasampo.lang.FileEmptyException;
+import sanasampo.lang.TiedostoChooser;
 import sanasampo.logic.Helper;
 
 
@@ -37,21 +34,21 @@ public final class Kayttoliittyma implements Runnable {
     * @see #luoKomponentit(Container)*/
     private Helper helper;
     /** Ruudukko joka sisällytetään RuudukkoPaneeliin*/
-    private Ruudukko r;
+    private Ruudukko ruudukko;
     /** Yläluokka ohjelman uudelleenajoa varten */
     private Sampo sampo;
     /** Tiedosto käyttöohjeiden näyttämiseen */
     private Tiedosto help; 
     /** Ohjelman avaaja käyttöohjeita varten */
-    Desktop dt;
+    Desktop desktop;
     /** Käyttöliittymän näkymä */
     private JFrame frame;
     /** Haun tulokset näyttävä lista */
     private JList list;
     /** Ruudukon alkiot painikkeina näyttävä elementti */
-    private RuudukkoPanel rp;
+    private RuudukkoPanel ruudukkoPanel;
     /** Tiedostonvalitsija sanakirjan vaihtamiseen */
-    private JFileChooser fc; 
+   private TiedostoChooser tiedostoValitsija;
     
     /** Listan kuuntelija ruudukon sanojen korostamiseen 
      * @see sanasampo.ui.RuudukkoPanel#korostaPolku(String, TreeMap)
@@ -79,7 +76,7 @@ public final class Kayttoliittyma implements Runnable {
     public Kayttoliittyma(Ruudukko r, ArrayList<String> m, TreeMap<String, ArrayList<String>> h, Sampo sa){
         sanat = m;
         osumat = h;
-        this.r = r;
+        this.ruudukko = r;
         sampo = sa;
         koko = r.getKoko();
         helper = new Helper();
@@ -112,21 +109,26 @@ public final class Kayttoliittyma implements Runnable {
      * @param container AWT-komponentit sisältävä säiliö
      */
     private void luoKomponentit(Container container) throws IOException, FileEmptyException {
-        frame.setJMenuBar(new MenuValikko(sampo, this)); //Menupalkki
-        
-        helper.reverseOrder(sanat);
+        //Menupalkki
+        frame.setJMenuBar(new MenuValikko(sampo, this)); 
+       
+        //Sanalista
+        helper.kaannaJarjestys(sanat);
         list = new JList(sanat.toArray());
-        frame.add(new JScrollPane(list), BorderLayout.CENTER); //Sanalista
+        frame.add(new JScrollPane(list), BorderLayout.CENTER); 
         
-        rp = new RuudukkoPanel(koko, koko, r); //Ruudukko
+        //Ruudukko
+        ruudukkoPanel = new RuudukkoPanel(koko, koko, ruudukko); 
         
-        addListeners();
-        frame.add(rp, BorderLayout.EAST);
+      
+        lisaaKuuntelijat();
+        frame.add(ruudukkoPanel, BorderLayout.EAST);
     }
     
+    
     /** Lisää käyttöliittymälle kuuntelijat */
-    private void addListeners(){
-        lk = new ListaKuuntelija(list, rp, osumat);
+    private void lisaaKuuntelijat(){
+        lk = new ListaKuuntelija(list, ruudukkoPanel, osumat);
         list.addListSelectionListener(lk);
     }
     
@@ -135,7 +137,7 @@ public final class Kayttoliittyma implements Runnable {
         JOptionPane.showMessageDialog(frame, "<html><h3>About program</h3>"
                 + "<font size=-2>"
                 + "Author: JHamberg<br>"
-                + "Version: Beta Release 2 (BR2)<br>"
+                + "Version: Release Candidate 1 (RC1)<br>"
                 + "Contact: JHamberg@Outlook.com<br><br>"
                 + "Copyright (C) 2013"
                 + "</font></html>");
@@ -143,29 +145,28 @@ public final class Kayttoliittyma implements Runnable {
     
     /** Uudelleenkäynnistää haun esim. eri sanakirjalla */
     public void uudelleenKaynnista() throws FileNotFoundException, IOException, FileEmptyException{
-        try{sampo.asenna();
-        sampo.kaynnista(r.getKirjaimet());
-        this.getFrame().setVisible(false);
-        this.getFrame().dispose(); 
-       }
-            catch(Exception x){
-                JOptionPane.showMessageDialog(frame, "Error: Selected dictionary is invalid!"
-                        + "\nPlease try again.");
-                vaihdaSanakirjaa();
-                valittu.kirjoita(edellinen);
-            }
+        try{
+            sampo.asenna();
+            sampo.kaynnista(ruudukko.getKirjaimet());
+            this.getFrame().setVisible(false);
+            this.getFrame().dispose();}
+        
+        catch(Exception x){
+            JOptionPane.showMessageDialog(frame, "Error: Selected dictionary is invalid!"
+            + "\nPlease try again.");
+            vaihdaSanakirjaa();
+            valittu.kirjoita(edellinen);}
     }
     
     /** Aloittaa uuden kierroksen */
-     public void kaynnista(){
+    public void kaynnista(){
         try{sampo.asenna();
             sampo.kaynnista();
             this.getFrame().setVisible(false);}
-            catch(Exception x){
-                JOptionPane.showMessageDialog(frame, "Error: Dictionary not found!"
-                        + "\nPlease use another dictionary.");
-            }
-            
+        
+        catch(Exception x){
+             JOptionPane.showMessageDialog(frame, "Error: Dictionary not found!"
+             + "\nPlease use another dictionary.");}
     }
     
     /** Antaa pääluokalle kehotteen sulkea ohjelma */
@@ -179,31 +180,24 @@ public final class Kayttoliittyma implements Runnable {
         help.avaa();
     }
     
-    /** Avaa tiedostonäkymän ja antaa käyttäjälle mahdollisuuden vaihtaa sanakirjaa
-     * kirjoittaa käytetyn sanakirjan nimen dictionary-tiedostoon */
+    /** Avaa tiedostonäkymän ja antaa käyttäjälle mahdollisuuden vaihtaa sanakirjaa.
+     * Kirjoittaa käytetyn sanakirjan nimen dictionary-tiedostoon */
     public void vaihdaSanakirjaa() throws FileNotFoundException, UnsupportedEncodingException, IOException, FileEmptyException{
-        fc = new JFileChooser();
-        
-        //Filtterit
-        fc.setAcceptAllFileFilterUsed(false);
-        fc.addChoosableFileFilter(new DictionaryFilter());
-        fc.setMultiSelectionEnabled(false);
-        
-        //Avataava hakemisto
-        fc.setCurrentDirectory(new File(".\\dic"));
-        if (fc.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION){ 
-            valittu.kirjoita(fc.getSelectedFile().getName());
+        tiedostoValitsija = new TiedostoChooser(frame);
+        if(tiedostoValitsija.kysy()){
+            valittu.kirjoita(tiedostoValitsija.getValitunNimi());
             uudelleenKaynnista();
         }
+        
     }
     
     /** Näyttää virheilmoituksen jos PDF-tiedostoa ei pystytä avaamaan */
-    public void helpFailure(){
+    public void helpVirhe(){
         JOptionPane.showMessageDialog(frame, "<html><h3>Error!</h3>"
-                + "File could not be opened. Instructions <br>"
-                + "can be found from the installation location of this program.<br><br>"
-                + "To open the file, you need a program,<br> that can read "
-                + "files in PDF-format.</html>");
+                + "File could not be opened. Instructions can be found "
+                + "<br>from the installation location of this program.<br><br>"
+                + "To open the instructions, you need a program which <br> "
+                + "can read PDF-files. </html>");
     }
     
     /** Palauttaa Sanakirjana käytetyn tiedoston nimen ilman tiedostopäätettä */
@@ -212,8 +206,9 @@ public final class Kayttoliittyma implements Runnable {
     }
     
     public void naytaUiError(){
-         JOptionPane.showMessageDialog(frame, "Failed to create UI!\n"
-                 + "Program will terminate.");
+         JOptionPane.showMessageDialog(frame, "Failed to create the user interface!\n"
+                 + "Program will now terminate.");
+         exit();
     }
     
     public JList getList(){
@@ -225,7 +220,7 @@ public final class Kayttoliittyma implements Runnable {
     }
     
     public String getKirjaimet(){
-        return r.getKirjaimet();
+        return ruudukko.getKirjaimet();
     }
     
     public int getListanKoko(){

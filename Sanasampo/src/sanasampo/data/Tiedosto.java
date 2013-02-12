@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import sanasampo.lang.FileEmptyException;
 
 
@@ -26,7 +25,10 @@ public class Tiedosto {
     private File file;
 
     /** Tiedoston ulkoiseen avaamiseen */
-    Desktop dt;
+    Desktop desktop;
+    
+    //** Lista johon sanat luetaan tiedostosta */ 
+    ArrayList<String> sisalto; 
     
     /**
      * Konstruktori alustaa {@link sanasampo.data.Tiedosto#file}-olion polulla,
@@ -48,24 +50,24 @@ public class Tiedosto {
         
         //ISO-8859-1 tukee ääkkösiä
         br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "ISO-8859-1")); 
-        ArrayList<String> temp = new ArrayList<String>();
+        sisalto = new ArrayList<String>();
         String sana;
         while ((sana = br.readLine()) != null) {
-            if (sana.length() >= 3) temp.add(sana);
+            if (sana.length() >= 3) sisalto.add(sana);
         }
-        if(temp.isEmpty()){throw new FileEmptyException("File is empty!");}
+        if(sisalto.isEmpty()){throw new FileEmptyException("File is empty!");}
         br.close();
-        return temp;
+        return sisalto;
     }
     
     /** Avaa tiedoston toisessa ohjelmassa */
     public void avaa() throws IOException{
-        dt = Desktop.getDesktop();
-        dt.open(file); 
+        desktop = Desktop.getDesktop();
+        desktop.open(file); 
     }
     
     /** Palauttaa totuusarvon tiedoston olemassaolosta */
-    public boolean exists(){
+    public boolean onOlemassa(){
         return file.exists();
     }
     

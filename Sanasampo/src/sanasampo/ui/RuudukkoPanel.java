@@ -25,14 +25,11 @@ public class RuudukkoPanel extends JPanel {
 
     /** Ruudukon koko*/
     private int koko;
-    
     /** Ruudukko kaksiulotteisena arrayna iterointia varten */
     private String[][] r;
-    
     /** Taulukko joka sisältää ruudukossa olevat painikkeet ja 
      yksiselitteisen esityksen niiden koordinaateille */
     private HashMap<JButton, String> buttonMap;
-    
     /** Apuluokka solukoordinaattien yhdistämistä varten*/
     Helper h;
 

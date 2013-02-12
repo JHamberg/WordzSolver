@@ -43,7 +43,7 @@ public class Syvahaku {
             for (int j = 0; j < N; j++) {
                 if (grid[i][j].equals(Character.toString(s.charAt(0)))) {
                     //tN = tarkistaNaapurit
-                    if (tN(i, j, 0, edelliset)) { 
+                    if (tarkistaNaapuri(i, j, 0, edelliset)) { 
                         return true;
                     }
                 }
@@ -80,8 +80,6 @@ public class Syvahaku {
      * <br><br>
      * Kaikki ilman- ja väli-ilmansuunnat ovat hyväksyttyjä, eikä 
      * sanojen löytymisen ehtona ole lineaarisuus. 
-     * <br>
-     * Metodin nimi on lyhenne vanhasta <i>tarkistaNaapurit</i> nimestä. 
      * 
      * @author JHamberg
      * @param x Alkukirjaimen x-koordinaatti
@@ -92,24 +90,25 @@ public class Syvahaku {
      * ehtojen mukaan. False jos sanalle ei löydy polkua tai jos polku
      * on vajaa.
      */
-     private boolean tN(int x, int y, int sijainti, ArrayList<String> edelliset) {
+     private boolean tarkistaNaapuri(int x, int y, int sijainti, ArrayList<String> edelliset) {
         if(sijainti >= s.length()){
             polku = kloonaaLista(edelliset);
             return true;
         }
         if (x >= N || y >= N || x < 0 || y < 0) return false; 
-        if (gridEquals(x, y, sijainti) && notAccessed(x,y,edelliset)){
+        if (ruutuOnSama(x, y, sijainti) && eiKaytyRuudussa(x,y,edelliset)){
            ArrayList<String> ed = kloonaaLista(edelliset);
            ed.add(h.yhdista(x, y));
             
-        if(tN(x+1, y+1, sijainti+1, ed)||
-        tN(x+1, y, sijainti+1, ed)||
-        tN(x+1, y-1, sijainti+1, ed)||
-        tN(x-1, y+1, sijainti+1, ed)||
-        tN(x-1, y, sijainti+1, ed)||
-        tN(x-1, y-1, sijainti+1, ed)||
-        tN(x, y+1, sijainti+1, ed)||
-        tN(x, y-1, sijainti+1, ed)){return true;}
+        //Ilmansuunnat   
+        if(tarkistaNaapuri(x+1, y+1, sijainti+1, ed)||
+        tarkistaNaapuri(x+1, y, sijainti+1, ed)||
+        tarkistaNaapuri(x+1, y-1, sijainti+1, ed)||
+        tarkistaNaapuri(x-1, y+1, sijainti+1, ed)||
+        tarkistaNaapuri(x-1, y, sijainti+1, ed)||
+        tarkistaNaapuri(x-1, y-1, sijainti+1, ed)||
+        tarkistaNaapuri(x, y+1, sijainti+1, ed)||
+        tarkistaNaapuri(x, y-1, sijainti+1, ed)){return true;}
         
         }
         return false;
@@ -121,7 +120,7 @@ public class Syvahaku {
      * @param y Ruudun y-koordinaatti
      * @param sijainti Kirjain jota sanasta etsitään
      */
-    private boolean gridEquals(int x, int y, int sijainti){
+    private boolean ruutuOnSama(int x, int y, int sijainti){
         if(grid[x][y].equals(Character.toString(this.s.charAt(sijainti)))){
             return true;
         }
@@ -133,7 +132,7 @@ public class Syvahaku {
      *@param y Ruudun y-koordinaatti 
      *@param e Lista edellisten ruutujen koordinaateista
      */
-    private boolean notAccessed(int x, int y, ArrayList<String> e){
+    private boolean eiKaytyRuudussa(int x, int y, ArrayList<String> e){
         for(String k : e){
             if(k.equals(h.yhdista(x,y))){
                 return false;

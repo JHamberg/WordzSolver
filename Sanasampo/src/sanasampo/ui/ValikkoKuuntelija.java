@@ -46,7 +46,7 @@ public class ValikkoKuuntelija implements ActionListener {
         else if (action.equals("Help")){
             try {ui.naytaHelp();} 
             catch (Exception ex) {
-                ui.helpFailure();
+                ui.helpVirhe();
             }
         }
         

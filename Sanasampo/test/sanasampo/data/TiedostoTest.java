@@ -34,14 +34,14 @@ public class TiedostoTest {
 
     @Test
     public void josEiTiedostoaLuodaanSellainen() {
-        assertEquals(true, tiedosto.exists());
+        assertTrue(tiedosto.onOlemassa());
     }
 
     @Test
     public void tukeeSkandinaavisiaKirjaimia() throws IOException, FileEmptyException {
         output.write("lyödä åkea");
         output.close();
-        assertEquals(true, (tiedosto.lueListaan().get(0).contains("ä")
+        assertTrue((tiedosto.lueListaan().get(0).contains("ä")
                          && tiedosto.lueListaan().get(0).contains("ö")
                          && tiedosto.lueListaan().get(0).contains("å")));
     }

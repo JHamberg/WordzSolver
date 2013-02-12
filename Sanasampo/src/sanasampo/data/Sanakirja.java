@@ -2,6 +2,7 @@ package sanasampo.data;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import sanasampo.lang.FileEmptyException;
@@ -15,27 +16,33 @@ import sanasampo.lang.FileEmptyException;
 public final class Sanakirja {
 
     /** Oletuksena alustamiseen käytetty tiedostopolku*/
-    private String DEFAULT_DICTIONARY;
+    private String oletus_sanakirja;
     
     /** Lista johon sanat luetaan tekstitiedostosta*/
     private ArrayList<String> sanat;
     
     /** Luettavan sanatiedoston tiedostopolku*/
     private String polku;
-    
-    /**Virhetilan totuusarvo*/
-    private boolean error = false;
 
     /**
      * Parametriton konstruktori kutsuu (kuormitettua) itseään oletuksena
      * olevalla tiedostopolulla, joka on määritelty muuttujaosiossa.
+     * 
+     * Jos ohjelman toiminnan kannalta kriittisiä tiedostoja ei löydy
+     * näytetään error ja suljetaan ohjelma. 
      *
-     * @see sanasampo.data.Sanakirja#DEFAULT_DICTIONARY
+     * @see sanasampo.data.Sanakirja#oletus_sanakirja
      */
-    public Sanakirja() throws FileNotFoundException, IOException, FileEmptyException {
-        DEFAULT_DICTIONARY = new Tiedosto("dic\\dictionary").lueListaan().get(0);
-        alusta("dic\\"+DEFAULT_DICTIONARY);
+    public Sanakirja() {
+        try{oletus_sanakirja = new Tiedosto("dic\\dictionary").lueListaan().get(0);
+            alusta("dic\\"+oletus_sanakirja);}
+        
+        catch(Exception e){
+             JOptionPane.showMessageDialog(null, "Failed to read dictionary file!\n"
+             + "Program will now terminate.");
+             System.exit(0);}
         }
+    
     /**
      * Konstruktori alustaa sanalistan lukemalla sanoja tekstitiedostosta, 
      * käyttäen luokkaa {@link sanasampo.data.Tiedosto} tiedostonhallintaan.
@@ -44,19 +51,11 @@ public final class Sanakirja {
      * @param polku Käyttäjän antama tiedostopolku
      * @see sanasampo.data.Tiedosto#lueListaan()
      */
-    public void alusta(String polku) {
+    public void alusta(String polku) throws FileNotFoundException, UnsupportedEncodingException, IOException, FileEmptyException {
         this.polku = polku;
-
-        try {
-            Tiedosto tk = new Tiedosto(polku);
-            sanat = tk.lueListaan();
-        } catch (Exception e) {   //Tiedostoa ei löytynyt
-            error = true;
-        }
-    }
-
-    public boolean getErrorState() {
-        return error; //TBI workaround
+        Tiedosto tk = new Tiedosto(polku);
+        sanat = tk.lueListaan();
+        
     }
 
     public String getTiedostoPolku() {

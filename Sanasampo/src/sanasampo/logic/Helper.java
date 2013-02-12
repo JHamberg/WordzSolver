@@ -4,18 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import sanasampo.lang.SanaComparator;
 
-/**
- * Sisältää useasti käytetyt perusmetodit ja siten pitää luokkien pituudet
- * järkevinä.
- */
+/** Sisältää useasti käytetyt perusmetodit ja siten pitää luokkien pituudet
+ * järkevinä. */
 public class Helper {
 
-    /**
-     * Tarkistaa onko luvun neliöjuuri kokonaisluku. Jos ehto pätee, on
+    /**Tarkistaa onko luvun neliöjuuri kokonaisluku. Jos ehto pätee, on
      * parametrina saadun luvun kokoinen ruudukko tasasivuinen
-     *
-     * @see sanasampo.data.Ruudukko#validoi(String)
-     */
+     * @see sanasampo.data.Ruudukko#validoi(String)*/
     public boolean onKahdenPotenssi(long n) {
         if (n < 0) {
             return false;
@@ -24,27 +19,36 @@ public class Helper {
         return tst * tst == n;
     }
 
-    /**
-     * Yhdistää kaksi integer-muuttujaa merkkijonoksi
-     *
+    /**Yhdistää kaksi integer-muuttujaa merkkijonoksi
      * @see sanasampo.logic.Syvahaku#notAccessed(int, int, ArrayList)
-     * @see sanasampo.logic.Syvahaku#tN(int, int, int, ArrayList)
-     */
+     * @see sanasampo.logic.Syvahaku#tN(int, int, int, ArrayList)*/
     public String yhdista(int x, int y) {
         return Integer.toString(x).concat(Integer.toString(y));
+    }
+    
+    /** Palauttaa parametrina saadun luvun verran välilyöntejä
+     @param i Haluttujen välilyöntien määrä
+     @return String joka sisältää välilyönnit */
+    public String tyhjaTila(int i){
+        String valilyonnit = "";
+        for(int j=0; j<i;j++) valilyonnit += " ";
+        return valilyonnit;
     }
 
     /**
      * Kääntää ja järjestää listan laskevasti sanan pituuden mukaan käyttäen
      * {@link sanasampo.lang.SanaComparator}-oliota
      */
-    public ArrayList<String> reverseOrder(ArrayList<String> a) {
+    public ArrayList<String> kaannaJarjestys(ArrayList<String> a) {
         Collections.sort(a, new SanaComparator());
         Collections.reverse(a);
         return a;
     }
 
-    public String capitalize(String word) {
+    /** Muuttaa annetun sanan ensimmäisen kirjaimen isoksi */
+    public String isoAlkuKirjain(String word) {
         return Character.toUpperCase(word.charAt(0)) + word.substring(1);
     }
+    
+    
 }

@@ -45,6 +45,6 @@ public class SampoTest {
     public void sampoHoitaaKaiken() throws IOException, FileNotFoundException, FileEmptyException {
         s.asenna();
         s.kaynnista("aina");
-        assertEquals(true, s.getTulos().contains("aina"));
+        assertTrue(s.getTulos().contains("aina"));
     }
 }
