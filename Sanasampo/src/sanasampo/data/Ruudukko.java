@@ -31,7 +31,7 @@ public class Ruudukko {
      * {@link sanasampo.logic.Helper} 
      */
     public Ruudukko() {
-        p = Pattern.compile("^[a-zA-Z0-9äöåÅÄÖ]*$", Pattern.CASE_INSENSITIVE);
+        p = Pattern.compile("^[a-zA-ZäöåÅÄÖ]*$", Pattern.CASE_INSENSITIVE);
         h = new Helper();
     }
 
