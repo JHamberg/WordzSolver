@@ -42,3 +42,6 @@ Toteutettu käyttöliittymä loppuun, lisätty mahdollisuus vaihtaa sanakirjaa, päiv
 Tiistai 12.2, 10h (Release Candidate 1)
 Korjattu virheitä, muutettu metodinimiä, uusi sekvenssikaavio, kirjoitettu testausdokumentaatio ja käyttöohjeet, 
 uusia testejä, parannettu virheenhallintaa
+
+Keskiviikko 13.2, 30min
+Muutettu tiedostopolun erotin universaaliksi. Rebuild.

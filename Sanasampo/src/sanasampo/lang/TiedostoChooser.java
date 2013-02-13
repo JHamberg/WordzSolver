@@ -25,7 +25,7 @@ public class TiedostoChooser extends JFileChooser{
         this.setMultiSelectionEnabled(false);
         
         //Avataava hakemisto
-        this.setCurrentDirectory(new File(".\\dic"));
+        this.setCurrentDirectory(new File("./dic"));
     }
     
     /** Näyttää tiedostonvalinta näkymän ja kertoo, onnistuiko valinta 

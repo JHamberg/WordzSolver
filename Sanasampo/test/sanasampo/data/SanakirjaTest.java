@@ -13,7 +13,7 @@ import org.junit.Test;
 import sanasampo.lang.FileEmptyException;
 
 public class SanakirjaTest {
-    static final String testDir = "test\\sanasampo\\files\\";
+    static final String testDir = "test/sanasampo/files/";
     static final String fileName = "sanakirjaTest.txt";
     Sanakirja s;
     File f;
@@ -48,7 +48,7 @@ public class SanakirjaTest {
         output.close();
         Sanakirja s1 = new Sanakirja();
         s1.alusta(testDir+fileName);
-        assertEquals("test\\sanasampo\\files\\sanakirjaTest.txt", s1.getTiedostoPolku());
+        assertEquals("test/sanasampo/files/sanakirjaTest.txt", s1.getTiedostoPolku());
     }
 
     @Test

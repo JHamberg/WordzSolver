@@ -34,8 +34,8 @@ public final class Sanakirja {
      * @see sanasampo.data.Sanakirja#oletus_sanakirja
      */
     public Sanakirja() {
-        try{oletus_sanakirja = new Tiedosto("dic\\dictionary").lueListaan().get(0);
-            alusta("dic\\"+oletus_sanakirja);}
+        try{oletus_sanakirja = new Tiedosto("dic/dictionary").lueListaan().get(0);
+            alusta("dic/"+oletus_sanakirja);}
         
         catch(Exception e){
              JOptionPane.showMessageDialog(null, "Failed to read dictionary file!\n"

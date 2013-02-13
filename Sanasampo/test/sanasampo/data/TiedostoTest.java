@@ -14,7 +14,7 @@ import sanasampo.lang.FileEmptyException;
 
 public class TiedostoTest {
 
-    static final String testDir = "test\\sanasampo\\files\\";
+    static final String testDir = "test/sanasampo/files/";
     static final String fileName = "tiedostoTest.txt";
     File f;
     Tiedosto tiedosto;

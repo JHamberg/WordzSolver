@@ -80,7 +80,7 @@ public final class Kayttoliittyma implements Runnable {
         sampo = sa;
         koko = r.getKoko();
         helper = new Helper();
-        try{ valittu = new Tiedosto("dic\\dictionary");
+        try{ valittu = new Tiedosto("dic/dictionary");
         edellinen = valittu.lueListaan().get(0);
         } catch(Exception e){
             naytaUiError();
