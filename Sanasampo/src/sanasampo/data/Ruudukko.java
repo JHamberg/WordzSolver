@@ -85,7 +85,7 @@ public class Ruudukko {
         }
         if (!h.onKahdenPotenssi(syote.length()) //Tasasivuinen ruudukko?
                 || syote.length() < 3 //Liian pieni
-                || syote.length() > 100 //Liian iso?
+                || syote.length() > 81 //Liian iso?
                 || syote.isEmpty() //Tyhjä syöte?
                 || syote.contains(" ") //Välilyöntejä?
                 || !p.matcher(syote).find()) { //Erikoismerkkejä?

@@ -39,7 +39,7 @@ public class Sampo {
         while (!ruudukko.alusta(syote)) {
             JOptionPane.showMessageDialog(null, 
                     "Grid size should be equilateral (3x3, 4x4..) and contain no special characters!\n"
-                    + "At the moment only dimensions up to 10x10 are accepted. ", 
+                    + "At the moment only dimensions up to 9x9 are accepted. ", 
                     "Grid Initialization Error!", JOptionPane.INFORMATION_MESSAGE);
             kysyKirjaimet();
         }
